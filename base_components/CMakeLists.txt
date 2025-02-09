@@ -1,0 +1,41 @@
+cmake_minimum_required(VERSION 3.15)
+
+project(baseComponents)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_compile_options(-Wall -Wpedantic -Wextra)
+
+add_subdirectory(lib)
+
+add_executable(basecomp_test_half_add base_components_tests/half_add_test.cpp)
+add_executable(basecomp_test_full_add base_components_tests/full_add_test.cpp)
+add_executable(byte_t_test base_components_tests/test_byte_t.cpp)
+add_executable(byte_doubler base_components_tests/bytedoubler.cpp)
+add_executable(byte_switch_in_test base_components_tests/test_byteswitch_in.cpp)
+add_executable(byte_add_test base_components_tests/byteaddtest.cpp)
+add_executable(byte_split_test base_components_tests/byte_split_test.cpp)
+add_executable(byte_maker_test base_components_tests/byte_maker_test.cpp)
+add_executable(byte_not_test base_components_tests/byte_not_test.cpp)
+add_executable(byte_neg_test base_components_tests/byte_neg_test.cpp)
+add_executable(bytememory_test base_components_tests/bytememory_test.cpp)
+add_executable(counter_test base_components_tests/counter_test.cpp)
+add_executable(program_test base_components_tests/program_test.cpp)
+
+target_link_libraries(basecomp_test_half_add PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(basecomp_test_full_add PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(byte_t_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(byte_doubler PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(byte_switch_in_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(byte_add_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(byte_split_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(byte_maker_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(byte_not_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(byte_neg_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(bytememory_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(counter_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(program_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+
+install(TARGETS basecomp_test_half_add basecomp_test_full_add byte_t_test byte_doubler byte_switch_in_test byte_add_test byte_split_test byte_maker_test byte_not_test byte_neg_test bytememory_test counter_test program_test DESTINATION bin)
+
