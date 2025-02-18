@@ -2,7 +2,7 @@
 
 namespace Virtual{
 
-ToggledByte::ToggledByte(ptr8_t input, ptr_t toggle) {
+ToggledByte::ToggledByte(ptr32_t input, ptr_t toggle) {
   input_pointers_[0] = toggle;
   byte_input_pointers_[0] = input;
   byte_output_pointers_[0] = std::make_shared<byte_t>(0);
@@ -17,7 +17,7 @@ void ToggledByte::compute_output() {
   }
 }
 
-void ToggledByte::connect_byte_output(ptr8_t connected_output) {
+void ToggledByte::connect_byte_output(ptr32_t connected_output) {
   byte_output_pointers_[0] = connected_output;
 }
 

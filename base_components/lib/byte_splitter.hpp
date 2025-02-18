@@ -5,7 +5,7 @@ namespace Virtual{
 
 class ByteSplitter : public byteMicroCircuit<0,1,8,0,0> {
   public:
-    ByteSplitter(ptr8_t conA = ground8);
+    ByteSplitter(ptr32_t conA = ground32);
     void compute_output();
     static const std::string gate_name;
 };

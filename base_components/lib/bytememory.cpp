@@ -2,7 +2,7 @@
 
 namespace Virtual{
 
-ByteMemory::ByteMemory(ptr_t load, ptr_t save, ptr8_t value) {
+ByteMemory::ByteMemory(ptr_t load, ptr_t save, ptr32_t value) {
   input_pointers_[0] = load;
   input_pointers_[1] = save;
   byte_input_pointers_[0] = value;

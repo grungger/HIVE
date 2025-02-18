@@ -2,7 +2,7 @@
 
 namespace Virtual {
 
-ByteSplitter::ByteSplitter(ptr8_t conA) {
+ByteSplitter::ByteSplitter(ptr32_t conA) {
   byte_input_pointers_[0] = conA;
   for (int i=0; i<8; i++) {
     output_pointers_[i] = std::make_shared<bool>((*conA)[i]);

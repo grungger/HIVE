@@ -8,7 +8,7 @@ namespace Virtual{
 
 class ByteNot : public byteMicroCircuit<0,1,0,1,10> {
   public:
-    ByteNot(ptr8_t inbyte=ground8);
+    ByteNot(ptr32_t inbyte=ground32);
     void rewire_input();
     static const std::string gate_name;
 };

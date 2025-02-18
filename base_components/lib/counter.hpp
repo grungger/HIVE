@@ -9,7 +9,7 @@ namespace Virtual{
 
 class Counter : public byteMicroCircuit<1,1,0,1,4> {
   public:
-    Counter(ptr_t overwrite=ground, ptr8_t value=ground8);
+    Counter(ptr_t overwrite=ground, ptr32_t value=ground32);
     void rewire_input();
     static const std::string gate_name;
     void compute_output();

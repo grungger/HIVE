@@ -5,6 +5,8 @@ cmake_minimum_required(VERSION 3.15)
 # Set the root project name
 project(VirtualComputer)
 
+enable_testing()
+
 # Add subdirectories for the base_logic and derived_logic projects
 add_subdirectory(base_logic)
 add_subdirectory(derived_logic)

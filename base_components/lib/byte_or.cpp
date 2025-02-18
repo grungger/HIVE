@@ -2,7 +2,7 @@
 
 namespace Virtual{
 
-ByteOr::ByteOr(ptr8_t inA, ptr8_t inB) {
+ByteOr::ByteOr(ptr32_t inA, ptr32_t inB) {
   byte_input_pointers_[0] = inA;
   byte_input_pointers_[1] = inB;
   circuit_components_[0] = std::make_shared<ByteSplitter>(inA);

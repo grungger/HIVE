@@ -5,7 +5,7 @@ namespace Virtual{
 
 int ByteOutput::counter_ = 0;
 
-ByteOutput::ByteOutput(ptr8_t connector) : id_(counter_++) {
+ByteOutput::ByteOutput(ptr32_t connector) : id_(counter_++) {
   byte_input_pointers_[0] = connector;
 }
 

@@ -15,12 +15,13 @@ add_compile_options(-Wall -Wextra -Wpedantic)
 add_subdirectory(lib)                                                           
                                                                                   
   # add executable to the project using the specified source files                
-add_executable(base_test0 base_logic_tests/TC_Crude_Awakening.cpp)                                                 
-add_executable(base_test1 base_logic_tests/TC_NAND_Gate.cpp)
-                                                                                  
+add_executable(io_test tests/logictest0.cpp)
+add_executable(nand_test tests/logictest1.cpp)
+
   # specify that we need the square library (squareLib)                           
-target_link_libraries(base_test0 baselogicLib)                                 
-target_link_libraries(base_test1 baselogicLib)
-                                                                                  
-  # specify install rules                                                         
-install(TARGETS base_test0 base_test1 DESTINATION bin)
+target_link_libraries(io_test baselogicLib)                                 
+target_link_libraries(nand_test baselogicLib)
+
+  # specify install rules
+add_test(NAME io_testexe COMMAND io_test) 
+add_test(NAME nand_testexe COMMAND nand_test)

@@ -2,7 +2,7 @@
 
 namespace Virtual{
 
-ByteAnd::ByteAnd(ptr8_t inA, ptr8_t inB) {
+ByteAnd::ByteAnd(ptr32_t inA, ptr32_t inB) {
   byte_input_pointers_[0] = inA;
   byte_input_pointers_[1] = inB;
   circuit_components_[0] = std::make_shared<ByteSplitter>(inA);

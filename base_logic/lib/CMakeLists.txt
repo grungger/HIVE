@@ -3,7 +3,7 @@ add_library(baselogicLib STATIC switch_in.cpp output.cpp nand.cpp wire.cpp)
         
   # add include directories to our target library                                 
   # (PUBLIC because users of the library will need the                            
-  # include file square.hpp)                                                      
+  # include *.hpp files)                                                      
 target_include_directories(baselogicLib PUBLIC ./)                                                                                  
   # specify install rules (for our square library squareLib)                      
 install(TARGETS baselogicLib                                                       

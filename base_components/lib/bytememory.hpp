@@ -9,7 +9,7 @@ namespace Virtual{
 
 class ByteMemory : public byteMicroCircuit<2,1,0,1,11> {
   public:
-    ByteMemory(ptr_t load=ground, ptr_t save=ground, ptr8_t value=ground8);
+    ByteMemory(ptr_t load=ground, ptr_t save=ground, ptr32_t value=ground32);
     void rewire_input();
     void memory_release();
     static const std::string gate_name;

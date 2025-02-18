@@ -36,15 +36,15 @@ struct byte_t {
   } 
 };
 
-using ptr8_t = std::shared_ptr<byte_t>;
+using ptr32_t = std::shared_ptr<byte_t>;
 
 template <io_t Nbit_in, io_t Nbyte_in, io_t Nbit_out, io_t Nbyte_out, io_t N_comp>
 class byteMicroCircuit : public microCircuit<Nbit_in, Nbit_out, N_comp> {
   protected:
-    std::array<ptr8_t, Nbyte_in> byte_input_pointers_;
-    std::array<ptr8_t, Nbyte_out> byte_output_pointers_;
+    std::array<ptr32_t, Nbyte_in> byte_input_pointers_;
+    std::array<ptr32_t, Nbyte_out> byte_output_pointers_;
   public:
-    static ptr8_t ground8;
+    static ptr32_t ground32;
     
     void print_in() {
       for (auto it=this->input_pointers_.begin(); it!=this->input_pointers_.end(); it++) {
@@ -68,7 +68,7 @@ class byteMicroCircuit : public microCircuit<Nbit_in, Nbit_out, N_comp> {
 
     virtual void rewire_input() {};      
 
-    void connect_byte_input(ptr8_t connected8, io_t index) {
+    void connect_byte_input(ptr32_t connected8, io_t index) {
       if (index >= Nbyte_in) {
         throw std::domain_error("Input that was attempted to connect is out of range");
       }
@@ -76,7 +76,7 @@ class byteMicroCircuit : public microCircuit<Nbit_in, Nbit_out, N_comp> {
       rewire_input();
     }
 
-    ptr8_t release_byte_output(io_t index) {
+    ptr32_t release_byte_output(io_t index) {
       if (index >= Nbyte_out) {
         throw std::domain_error("Output tried to release is out of range");
       }
@@ -85,7 +85,7 @@ class byteMicroCircuit : public microCircuit<Nbit_in, Nbit_out, N_comp> {
 };
 
 template <io_t Nbit_in, io_t Nbyte_in, io_t Nbit_out, io_t Nbyte_out, io_t N_comp>
-ptr8_t byteMicroCircuit<Nbit_in,Nbyte_in,Nbit_out,Nbyte_out,N_comp>::ground8 = std::make_shared<byte_t>(0);
+ptr32_t byteMicroCircuit<Nbit_in,Nbyte_in,Nbit_out,Nbyte_out,N_comp>::ground32 = std::make_shared<byte_t>(0);
 
 } //namespace Virtual
 

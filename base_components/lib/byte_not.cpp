@@ -2,7 +2,7 @@
 
 namespace Virtual{
 
-ByteNot::ByteNot(ptr8_t inbyte) {
+ByteNot::ByteNot(ptr32_t inbyte) {
   byte_input_pointers_[0] = inbyte;
   circuit_components_[0] = std::make_shared<ByteSplitter>(inbyte);
   circuit_components_[1] = std::make_shared<Not>(circuit_components_[0]->release_output(0));

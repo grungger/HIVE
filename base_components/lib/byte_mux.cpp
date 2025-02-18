@@ -2,7 +2,7 @@
 
 namespace Virtual{
 
-ByteMUX::ByteMUX(ptr_t toggler, ptr8_t  inA, ptr8_t inB) {
+ByteMUX::ByteMUX(ptr_t toggler, ptr32_t  inA, ptr32_t inB) {
   input_pointers_[0] = toggler;
   byte_input_pointers_[0] = inA;
   byte_input_pointers_[1] = inB;

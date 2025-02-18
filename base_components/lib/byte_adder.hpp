@@ -12,7 +12,7 @@ namespace Virtual{
  */
 class ByteAdder : public byteMicroCircuit<1,2,1,1,11> {
   public:
-    ByteAdder(ptr_t inbit=ground, ptr8_t sumA=ground8, ptr8_t sumB=ground8);
+    ByteAdder(ptr_t inbit=ground, ptr32_t sumA=ground32, ptr32_t sumB=ground32);
     void rewire_input();
     static const std::string gate_name;
 };

@@ -8,7 +8,7 @@ class Program : public byteMicroCircuit<0,1,0,4,0> {
   protected:
     std::vector<byte_t> code_lines;
   public:
-    Program(ptr8_t locator=ground8);
+    Program(ptr32_t locator=ground32);
     template <typename Container>
     void add_lines(const Container& container) {
       assert(container.size() % 4 == 0);

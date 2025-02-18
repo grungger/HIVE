@@ -2,13 +2,13 @@
 
 namespace Virtual{
 
-Counter::Counter(ptr_t overwrite, ptr8_t value) {
+Counter::Counter(ptr_t overwrite, ptr32_t value) {
   input_pointers_[0] = overwrite;
   byte_input_pointers_[0] = value;
-  circuit_components_[0] = std::make_shared<ByteMUX>(overwrite, ground8, value);
+  circuit_components_[0] = std::make_shared<ByteMUX>(overwrite, ground32, value);
   circuit_components_[1] = std::make_shared<Not>(ground);
   circuit_components_[2] = std::make_shared<ByteMemory>(circuit_components_[1]->release_output(0), circuit_components_[1]->release_output(0), circuit_components_[0]->release_byte_output(0));
-  circuit_components_[3] = std::make_shared<ByteAdder>(circuit_components_[1]->release_output(0), circuit_components_[2]->release_byte_output(0), ground8);
+  circuit_components_[3] = std::make_shared<ByteAdder>(circuit_components_[1]->release_output(0), circuit_components_[2]->release_byte_output(0), ground32);
   circuit_components_[0]->connect_byte_input(circuit_components_[3]->release_byte_output(0),0);
   byte_output_pointers_[0] = circuit_components_[2]->release_byte_output(0);
 }

@@ -7,7 +7,7 @@ namespace Virtual{
 
 class ByteMUX : public byteMicroCircuit<1,2,0,1,3> {
   public:
-    ByteMUX(ptr_t toggler=ground, ptr8_t inA=ground8, ptr8_t inB=ground8);
+    ByteMUX(ptr_t toggler=ground, ptr32_t inA=ground32, ptr32_t inB=ground32);
     void rewire_input();
     static const std::string gate_name;
 };

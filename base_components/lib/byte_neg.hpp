@@ -7,7 +7,7 @@ namespace Virtual{
 
 class ByteNeg : public byteMicroCircuit<0,1,0,1,3> {
   public:
-    ByteNeg(ptr8_t input = ground8);
+    ByteNeg(ptr32_t input = ground32);
     void rewire_input();
     static const std::string gate_name;
 };

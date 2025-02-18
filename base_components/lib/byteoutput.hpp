@@ -5,7 +5,7 @@ namespace Virtual{
 
 class ByteOutput : public byteMicroCircuit<0,1,0,0,0> {
   public:
-    ByteOutput(ptr8_t connector=ground8);
+    ByteOutput(ptr32_t connector=ground32);
     static const std::string gate_name;
     void compute_output();
     void printf_out();

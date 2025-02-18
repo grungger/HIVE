@@ -2,7 +2,7 @@
 
 namespace Virtual{
 
-ByteAdder::ByteAdder(ptr_t inbit, ptr8_t sumA, ptr8_t sumB) {
+ByteAdder::ByteAdder(ptr_t inbit, ptr32_t sumA, ptr32_t sumB) {
   input_pointers_[0] = inbit;
   byte_input_pointers_[0] = sumA;
   byte_input_pointers_[1] = sumB;

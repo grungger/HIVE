@@ -8,7 +8,7 @@
                                                                                   
   class ByteNor : public byteMicroCircuit<0,2,0,1,11> {                          
     public:                                                                       
-      ByteNor(ptr8_t inA=ground8, ptr8_t inB=ground8);                           
+      ByteNor(ptr32_t inA=ground32, ptr32_t inB=ground32);                           
       void rewire_input();                                                        
       static const std::string gate_name;                                         
   };                                                                              

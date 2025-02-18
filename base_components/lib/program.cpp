@@ -2,7 +2,7 @@
 
 namespace Virtual{
 
-Program::Program(ptr8_t locator) {
+Program::Program(ptr32_t locator) {
   byte_input_pointers_[0] = locator;
   byte_output_pointers_[0] = std::make_shared<byte_t>(0);
   byte_output_pointers_[1] = std::make_shared<byte_t>(0);
