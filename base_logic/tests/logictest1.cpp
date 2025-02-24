@@ -1,3 +1,11 @@
+/****************************
+ * @file logictest1.cpp
+ * 
+ * The test is called nand_test, can be built via "make nand_test" and run
+ *   with all other tests via "make test". It tests the NAND gate and also
+ *   uses Switch_in gates.
+ ****************************/
+
 #include "switch_in.hpp"
 #include "output.hpp"
 #include "nand.hpp"

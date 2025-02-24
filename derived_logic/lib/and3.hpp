@@ -17,6 +17,11 @@ namespace Virtual{
 /**
  * @brief And3 is a three bit microCircuit with two And sub gates which outputs
  *   the three bit logic And in one output.
+ *
+ * And3 outputs 1 only if all three inputs are 1. It can simply be achieved by 
+ * applying two And gates on the inputs A, B and C: And3{A,B,C} = (A And B) And C.
+ *
+ * @test Constructor, print_out and compute_output are tested in 3gate_test.
  */
 class And3 : public microCircuit<3,1,2> {
   public:

@@ -1,3 +1,11 @@
+/***********************
+ * @file logictest0.cpp
+ * 
+ * The test is called io_test can be built via "make io_test" and
+ *   run with all other tests via "make test". It tests Switch_in and
+ *   Output functionality.
+ ***********************/
+
 #include "switch_in.hpp"
 #include "output.hpp"
 #include <stdexcept>

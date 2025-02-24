@@ -16,6 +16,11 @@ namespace Virtual{
 
 /**
  * @brief Xnor is a two bit microCircuit gate with 2 subgates (Xor, Not).
+ *
+ * Xnor gate outputs 1 if both inputs are the same (either both 0 or 1) and 0 otherwise.
+ * The Xnor gate can be implemented by combining a Xor gate with a Not gate on its output.
+ *
+ * @test Constructor, print_out and compute_output are tested in 2gate_test.
  */
 class Xnor : public microCircuit<2,1,2> {
   public:

@@ -17,6 +17,13 @@ namespace Virtual{
 /**
  * @brief And is a two bit microCircuit with two components (NAND and Not gate) that
  *   outputs (inputA and inputB).
+ *
+ * And is a two bit microCircuit with one output and two sub-components. It acts as
+ * the logic gate "And" outputting 1 only if both inputs are 1. It achieves this by
+ * directly feeding the inputs into the NAND gate inputs and simply using Not on the
+ * output, before outputting it to the And output.
+ *
+ * @test Constructor, print_out and compute_output are tested in 2gate_test.
  */
 class And : public microCircuit<2,1,2> {
   public:

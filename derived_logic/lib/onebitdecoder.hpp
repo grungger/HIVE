@@ -20,6 +20,8 @@ namespace Virtual{
  * The OneBitDecoder decodes the input - decoding meaning, given any input
  * there is exactly one unique output channel turned on - so 0 maps to 1,0 and
  * 1 maps to 0,1 (see ThreeBitDecoder for an extended version).
+ *
+ * @test Constructor, print_out and compute_output are tested in decoding_test.
  */
 class OneBitDecoder : public microCircuit<1,2,2> {
   public:

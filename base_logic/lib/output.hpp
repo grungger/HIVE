@@ -15,6 +15,8 @@ namespace Virtual{
 
 /**
  * @brief Output is a gate with only one input bit which is outputted to std::ostream.
+ * @test Constructor, print_in, print_out and compute_output are tested in 
+ *   logictest0.cpp and the corresponding test is called io_test.
  */ 
 class Output : public Gate<1,0> {
   public:

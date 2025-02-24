@@ -17,6 +17,11 @@ namespace Virtual{
 /**
  * @brief Or is a two bit microCircuit with three sub-gates (two Not and 
  *   one Nand gate) that outputs (inputA or inputB).
+ * 
+ * Or gate is only 0 if both inputs are 0. It can be implemented via
+ * (Not A) NAND (Not B) for inputs A and B.
+ *
+ * @test Constructor, print_out and compute_output are tested in 2gate_test.
  */
 class Or : public microCircuit<2,1,3> {
   public:

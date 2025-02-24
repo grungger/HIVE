@@ -24,6 +24,8 @@ namespace Virtual{
  * third bit corresponds to the highest order (2^2). So e.g. 000->10000000 and
  * 111->00000001, while 001->00001000 (note bits are in the order of input_pointers_
  * and output_pointers_ not bit significance).
+ *
+ * @test Constructor, print_out and compute_output are tested in decoding_test.
  */
 class ThreeBitDecoder : public microCircuit<3,8,11> {
   public:

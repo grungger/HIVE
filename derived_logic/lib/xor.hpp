@@ -16,6 +16,12 @@ namespace Virtual{
 
 /**
  * @brief Xor is a two bit microCircuit with three sub-gates (2 Nor, 1 And).
+ *
+ * Xor outputs 1 if the two inputs are different, i.e. if input is 0,1 or 1,0. The
+ * logical implementation can be achieved with two Nor gates and an And gate acting
+ * as follows on inputs A and B: A Xor B = (A Nor B) Nor (A And B).
+ *
+ * @test Constructor, print_out and compute_output are tested in 2gate_test.
  */
 class Xor : public microCircuit<2,1,3> {
   public:

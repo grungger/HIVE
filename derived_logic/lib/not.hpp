@@ -16,6 +16,12 @@ namespace Virtual{
 /**
  * @brief Not is a one bit microCircuit with one component (a NAND gate) that 
  *   outputs the opposite output as the input.
+ *
+ * Not is a one bit microCircuit with one sub-component and one output. It corresponds
+ * to a bit-flip on the input bit i.e. it maps 0 to 1 and 1 to 0. The internal logic consists of
+ * simply connecting the input to both inputs of the NAND gate giving the desired output.
+ *
+ * @test Constructor, print_out and compute_output are tested in 2gate_test.
  */
 class Not : public microCircuit<1,1,1> {
   public:

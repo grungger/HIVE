@@ -18,6 +18,9 @@ namespace Virtual{
  *
  * NAND is a two bit gate that computes "not and" on two inputs 
  * and writes to an output.
+ *
+ * @test Constructor, print_in, print_out and compute_output are tested in logictest1.cpp
+ *   with corresponding Make name "nand_test".
  */
 class NAND : public Gate<2,1> {
   public:

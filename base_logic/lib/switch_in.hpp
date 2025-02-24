@@ -20,6 +20,9 @@ namespace Virtual{
  * The class Switch_in is an input gate with a constant value (false by default)
  * that can be toggled on or off via the method change_state. Calling compute_output()
  * simply writes the saved state_ value to the output bit.
+ *
+ * @test Constructor, print_in, print_out and change_state are tested in logictest0.cpp
+ *   with corresponding Makefile name "iotest".
  */
 class Switch_in : public Gate<0,1> {
   public:

@@ -9,12 +9,14 @@ add_compile_options(-Wall -Wpedantic -Wextra)
 
 add_subdirectory(lib)
 
-add_executable(derived_twog_test derived_logic_tests/two_gate_tests.cpp)
-add_executable(derived_threeg_test derived_logic_tests/three_input_gates.cpp)
-add_executable(decoding derived_logic_tests/decoding.cpp)
+add_executable(2gate_test tests/2gate_test.cpp)
+add_executable(3gate_test tests/3gate_test.cpp)
+add_executable(decoding_test tests/decoding_test.cpp)
 
-target_link_libraries(derived_twog_test PRIVATE derivedlogicLib baselogicLib)
-target_link_libraries(derived_threeg_test PRIVATE derivedlogicLib baselogicLib)
-target_link_libraries(decoding PRIVATE derivedlogicLib baselogicLib)
+target_link_libraries(2gate_test PRIVATE derivedlogicLib baselogicLib)
+target_link_libraries(3gate_test PRIVATE derivedlogicLib baselogicLib)
+target_link_libraries(decoding_test PRIVATE derivedlogicLib baselogicLib)
 
-install(TARGETS derived_twog_test derived_threeg_test decoding DESTINATION bin)
+add_test(NAME 2gate_testexe COMMAND 2gate_test)
+add_test(NAME 3gate_testexe COMMAND 3gate_test)
+add_test(NAME decoding_testexe COMMAND decoding_test)

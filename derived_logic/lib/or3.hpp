@@ -14,6 +14,12 @@ namespace Virtual{
 
 /**
  * @brief Or3 is the three bit implementation of the Or gate using two 2bit Or gates.
+ *
+ * Or3 outputs 0 only if all three inputs are 0, i.e. if any input is 1, Or3 outputs 1.
+ * It is implemented with two Or gates acting on inputs A, B and C as: 
+ * Or3{A,B,C} = (A Or B) Or C.
+ *
+ * @test Constructor, print_out and compute_output are tested in 3gate_test.
  */
 class Or3 : public microCircuit<3,1,2> {
   public:
