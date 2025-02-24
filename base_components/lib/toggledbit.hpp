@@ -2,10 +2,18 @@
  * @file toggledbit.hpp
  *
  * @brief Implementation of the ToggledBit.
- */
-#include "gate.hpp"
+ ************************************************/
+// Includes:
+#include "microcircuit.hpp"
+#include "not.hpp"
+#include "and.hpp"
+#include "wire.hpp"
+#include "or.hpp"
+
+// Header Guards:
 #ifndef TOGGLEDBIT_H
 #define TOGGLEDBIT_H
+
 namespace Virtual{
 
 /**
@@ -23,19 +31,17 @@ namespace Virtual{
  * undefined memory overwriting (if both gates are writing to memory in a single tick,
  * the final memory value depends on the internal implementation order and 
  * is generally undefined).
- *
- * @note This gate is a basic gate where the internal logic is written via a
- *   conditional...
  * @test
  */
-class ToggledBit : public Gate<2,1>  {
+class ToggledBit : public microCircuit<2,1,5>  {
   public:
     /**
      * @brief Constructor for the ToggledBit gate
+     */
     ToggledBit(ptr_t conIn=ground, ptr_t conTog=ground);
     static const std::string gate_name;
-    void compute_output();
     void connect_output(ptr_t connected_output);
+    void rewire_input();
 };
 
 } //namespace Virtual

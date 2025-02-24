@@ -46,6 +46,7 @@ class BaseGate {
   public:
     virtual ~BaseGate() = default;
     ptr32_t ground32;
+    ptr32_t garbage32;
     virtual void compute_output() = 0;
     const std::string gate_name;
     virtual void print_in() = 0;
@@ -119,6 +120,11 @@ class Gate : public BaseGate {
      * @brief ground is a permanent single bit pointer which will always be zero
      */
     static ptr_t ground;
+
+    /**
+     * @brief garbage is a permanent single bit pointer that is reserved for unused output.
+     */
+    static ptr_t garbage;
      
   protected:
     /**
@@ -139,5 +145,15 @@ class Gate : public BaseGate {
 template <io_t N_in, io_t N_out>
 ptr_t Gate<N_in,N_out>::ground = std::make_shared<bool>(false);
 
+/**
+ * @brief Templated initilization of garbage - a static variable of Gate<Nin, Nout>.
+ * @tparam N_in number of gate input bits.
+ * @tparam N_out number of gate output bits.
+ */
+template <io_t N_in, io_t N_out>
+ptr_t Gate<N_in, N_out>::garbage = std::make_shared<bool>(false);
+
 } //namespace Virtual
+
 #endif
+
