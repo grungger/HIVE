@@ -14,16 +14,23 @@ ToggledBit::ToggledBit(ptr_t conIn, ptr_t conTog) {
   circuit_components_[4] = std::make_shared<Or>(
 			circuit_components_[1]->release_output(0),
 			circuit_components_[3]->release_output(0));
+  circuit_components_[5] = std::make_shared<Wire>(
+			circuit_components_[4]->release_output(0));
   circuit_components_[2]->connect_input(
-			circuit_components_[4]->release_output(0), 0);
-  output_pointers_[0] = circuit_components_[4]->release_output(0);
+			circuit_components_[5]->release_output(0), 0);
+
+  output_pointers_[0] = circuit_components_[5]->release_output(0);
 }
 
 const std::string ToggledBit::gate_name = "ToggledBit";
 
 void ToggledBit::connect_output(ptr_t connected_output) {
   output_pointers_[0] = connected_output;
-  circuit_components_[2]->connect_input(connected_output, 1);
+  circuit_components_[5] = std::make_shared<Wire>(
+			circuit_components_[4]->release_output(0),
+			connected_output);
+  circuit_components_[2]->connect_input(
+			circuit_components_[5]->release_output(0),0);
 }
 
 void ToggledBit::rewire_input() {

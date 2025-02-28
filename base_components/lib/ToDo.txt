@@ -1,4 +1,3 @@
-bitmemory
 byte_adder
 byte_and
 byte_maker
@@ -14,8 +13,5 @@ bytemicrocirciut
 byteoutput
 byteswitch_in
 counter
-delay
-full_adder
 program
-toggledbit
 toggledbyte

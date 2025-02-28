@@ -30,17 +30,45 @@ namespace Virtual{
  * to one memory address and their toggle input should be complimentary to avoid 
  * undefined memory overwriting (if both gates are writing to memory in a single tick,
  * the final memory value depends on the internal implementation order and 
- * is generally undefined).
- * @test
+ * is generally undefined). The actual implementation is done in a roundabout way,
+ * while originally it was simply done with a C++-if-statement, it is now built as
+ * a microcircuit. If you create a connection from the output to the input then you
+ * can toggle between two bits: either overwrite the output with the new value,
+ * or "overwrite" the output with the output, hence doing nothing. This can be done
+ * via the logic (with O the old output, V the new value and T the toggling bit):
+ * ToggledBit(V,T) = (B And V) Or ((Not B) And O). to avoid problems with directly
+ * adding an output pointer to an input pointer there is also a Wire right before the
+ * output to add a layer of abstraction.
+ *
+ * @test Constructor, print_in, print_out, connect_output and compute_output are tested
+ *   in toggledbit_test.
  */
-class ToggledBit : public microCircuit<2,1,5>  {
+class ToggledBit : public microCircuit<2,1,6>  {
   public:
     /**
-     * @brief Constructor for the ToggledBit gate
+     * @brief Constructor for the ToggledBit gate, creates the internal circuitry and
+     *   connects in- and outputs - it contains a Not gate, two And gates, a Wire and 
+     *   an Or gate.
+     * @param conIn the first input bit - the value to overwrite the output with.
+     * @param conTog the second input bit - the toggling bit.
      */
     ToggledBit(ptr_t conIn=ground, ptr_t conTog=ground);
+
     static const std::string gate_name;
+
+    /**
+     * @brief connect_output changes where the object writes the output to a new memory
+     *   location, allowing for several ToggledBit's pointing to the same location.
+     * @param connected_output the new output pointer.
+     * @note We make use of the Wire functionality to be constructed with a preexisting
+     *   output bit; connect_output creates a new Wire component in memory, hence 
+     *   has a small memory overhead.
+     */
     void connect_output(ptr_t connected_output);
+
+    /**
+     * @brief rewire_input updates the Not and one And gate inputs with input_pointers_.
+     */
     void rewire_input();
 };
 

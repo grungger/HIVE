@@ -23,6 +23,10 @@ add_executable(bytememory_test base_components_tests/bytememory_test.cpp)
 add_executable(counter_test base_components_tests/counter_test.cpp)
 add_executable(program_test base_components_tests/program_test.cpp)
 
+add_executable(toggledbit_test tests/toggledbit_test.cpp)
+add_executable(bitmemory_test tests/bitmemory_test.cpp)
+add_executable(hf_adder_test tests/hf_adder_test.cpp)
+
 target_link_libraries(basecomp_test_half_add PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(basecomp_test_full_add PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(byte_t_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
@@ -36,6 +40,14 @@ target_link_libraries(byte_neg_test PRIVATE basecomponentsLib derivedlogicLib ba
 target_link_libraries(bytememory_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(counter_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(program_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+
+target_link_libraries(toggledbit_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(bitmemory_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(hf_adder_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+
+add_test(NAME toggledbit_testexe COMMAND toggledbit_test)
+add_test(NAME bitmemory_testexe COMMAND bitmemory_test)
+add_test(NAME hf_adder_testexe COMMAND hf_adder_test)
 
 install(TARGETS basecomp_test_half_add basecomp_test_full_add byte_t_test byte_doubler byte_switch_in_test byte_add_test byte_split_test byte_maker_test byte_not_test byte_neg_test bytememory_test counter_test program_test DESTINATION bin)
 

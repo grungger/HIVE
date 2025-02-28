@@ -1,9 +1,20 @@
+/*****************************************************
+ * @file bytemicrocircuit.hpp
+ *
+ * @brief Implementation of a byte representation and a 32bit-word representation,
+ *   as well as the wordMicroCircuit class which takes 32bit-words as input on top
+ *   of normal bit inputs making it a natural extension to the microCircuit class.
+ *****************************************************/
+// Includes:
 #include "microcircuit.hpp"
 #include <cstdint>
 #include <iostream>
 #include <cassert>
+
+// Header Guards:
 #ifndef BYTEMICROCIRCUIT_H
 #define BYTEMICROCIRCUIT_H
+
 namespace Virtual{
 
 struct byte_t {

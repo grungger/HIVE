@@ -7,6 +7,11 @@ Wire::Wire(ptr_t input) {
   output_pointers_[0] = std::make_shared<bool>(*input);
 }
 
+Wire::Wire(ptr_t input, ptr_t output) {
+  input_pointers_[0] = input;
+  output_pointers_[0] = output;
+}
+
 const std::string Wire::gate_name = " ";
 
 void Wire::compute_output() {

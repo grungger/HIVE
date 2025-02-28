@@ -24,6 +24,16 @@ class Wire : public Gate<1,1> {
      * @param input is a pointer to a bit which holds the input to the wire.
      */
     Wire(ptr_t input=ground);
+
+    /**
+     * @brief Constructor that allows for the connection of an existing input to an
+     *   existing output bit - in contrast to the default constructor which creates
+     *   a new output bit.
+     * @param input is a pointer to a bit which holds the input to the wire.
+     * @param output is a pointer to a bit to which the wire should write the input.
+     */
+    Wire(ptr_t input, ptr_t output);
+
     static const std::string gate_name;
     /**
      * @brief compute_output() writes the input bit value to the output bit.
