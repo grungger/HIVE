@@ -17,8 +17,12 @@
 namespace Virtual{
 
 // Initialization of byte_t 
-// Implementation can be found in base_components/lib/bytemicrocircuit.hpp
+// Implementation can be found in base_components/lib/wordmicrocircuit.hpp
 struct byte_t;
+
+// Initialization of word_t
+// Implementation can be found in base_components/lib/wordmicrocircuit.hpp
+struct word_t;
 
 // Typename definitions:
 /**
@@ -30,9 +34,13 @@ using io_t = unsigned short;
  */
 using ptr_t = std::shared_ptr<bool>;
 /**
- * @brief ptr32_t is the address of a 32bit word
+ * @brief ptr8_t is the address of a byte (8 bits)
  */
-using ptr32_t = std::shared_ptr<byte_t>;
+using ptr8_t = std::shared_ptr<byte_t>;
+/**
+ * @brief ptr32_t is the address of a word (32 bits)
+ */
+using ptr32_t = std::shared_ptr<word_t>;
 
 /**
  * @brief BaseGate is the ABC base class of all gates.
@@ -45,8 +53,9 @@ using ptr32_t = std::shared_ptr<byte_t>;
 class BaseGate {
   public:
     virtual ~BaseGate() = default;
+    ptr8_t ground8;
     ptr32_t ground32;
-    ptr32_t garbage32;
+    //ptr32_t garbage32;
     virtual void compute_output() = 0;
     const std::string gate_name;
     virtual void print_in() = 0;
@@ -54,11 +63,14 @@ class BaseGate {
     virtual void print_components() {}
     virtual void rewire_inputs() {}
     virtual void connect_input(ptr_t,io_t) = 0;
-    virtual void connect_byte_input(ptr32_t,io_t) {}
+    virtual void connect_byte_input(ptr8_t,io_t) {}
+    virtual void connect_word_input(ptr32_t,io_t) {}
     virtual ptr_t release_output(io_t) = 0;
     virtual void connect_output(ptr_t) {}
-    virtual void connect_byte_output(ptr32_t) {}
-    virtual ptr32_t release_byte_output(io_t) {return this->ground32;}
+    virtual void connect_byte_output(ptr8_t) {}
+    virtual void connect_word_output(ptr32_t) {}
+    virtual ptr8_t release_byte_output(io_t) {return this->ground8;}
+    virtual ptr32_t release_word_output(io_t) {return this->ground32;}
     virtual void memory_release() {}
 };
 

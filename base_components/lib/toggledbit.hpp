@@ -36,7 +36,7 @@ namespace Virtual{
  * can toggle between two bits: either overwrite the output with the new value,
  * or "overwrite" the output with the output, hence doing nothing. This can be done
  * via the logic (with O the old output, V the new value and T the toggling bit):
- * ToggledBit(V,T) = (B And V) Or ((Not B) And O). to avoid problems with directly
+ * ToggledBit(V,T) = (T And V) Or ((Not T) And O). to avoid problems with directly
  * adding an output pointer to an input pointer there is also a Wire right before the
  * output to add a layer of abstraction.
  *
