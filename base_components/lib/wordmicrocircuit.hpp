@@ -7,7 +7,6 @@
  *****************************************************/
 // Includes:
 #include "microcircuit.hpp"
-#include <cstdint>
 #include <iostream>
 #include <cassert>
 
@@ -24,7 +23,7 @@ namespace Virtual{
  * of the byte_t struct and allows for initialization with integer types
  * small enough to be convertible to std::uint8_t. It also has methods
  * for accessing individual bits via operator[].
- */
+ */ 
 struct byte_t {
   /**
    * @brief value is the member variable that holds the bit values.
@@ -127,51 +126,6 @@ struct word_t {
     return *this;
   }  
 }; // TODO: Finish Word_t and byte_t documentation
-
-
-using ptr8_t = std::shared_ptr<byte_t>;
-using ptr32_t = std::shared_ptr<word_t>;
-
-
-/**
- * @brief ByteArg is a struct to quickly interface between 8 bit inputs and a Byte.
- */
-struct ByteArg {
-/* old syntax:
-  ptr_t in1 = Gate<0,0>::ground;
-  ptr_t in2 = Gate<0,0>::ground;
-  ptr_t in4 = Gate<0,0>::ground;
-  ptr_t in8 = Gate<0,0>::ground;
-  ptr_t in16 = Gate<0,0>::ground;
-  ptr_t in32 = Gate<0,0>::ground;
-  ptr_t in64 = Gate<0,0>::ground;
-  ptr_t in128 = Gate<0,0>::ground;
-*/
-  std::array<ptr_t, 8> bits;
-  
-  ByteArg() {
-    for (int i=0; i<8; i++) {
-      bits[i] = Gate<0,0>::ground;
-    }
-  }
-// TODO: find correct syntax for read only operator[] and add write only operator[] overload
-  ptr_t operator[](int i) {
-    return bits[i];
-  }
-};
-
-/**
- * @brief WordArg is a struct to quickly interface between 32 bit inputs and a Word.
- */
-struct WordArg {
-  std::array<ptr_t, 32> bits;
-
-  WordArg() {
-    for (int i=0; i<32; i++) {
-      bits[i] = Gate<0,0>::ground;
-    }
-  }
-};
 
 
 /**

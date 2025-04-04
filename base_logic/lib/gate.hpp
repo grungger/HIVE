@@ -19,7 +19,7 @@ namespace Virtual{
 // Initialization of byte_t 
 // Implementation can be found in base_components/lib/wordmicrocircuit.hpp
 struct byte_t;
-
+ 
 // Initialization of word_t
 // Implementation can be found in base_components/lib/wordmicrocircuit.hpp
 struct word_t;
@@ -41,6 +41,48 @@ using ptr8_t = std::shared_ptr<byte_t>;
  * @brief ptr32_t is the address of a word (32 bits)
  */
 using ptr32_t = std::shared_ptr<word_t>;
+
+
+// Initialization and Implementation of ByteArg
+/**
+ * @brief ByteArg is a struct to quickly interface between 8 bit inputs and a Byte.
+ */ 
+struct ByteArg {
+  /**
+   * @brief bits saves each bit in an array with bits[i] corresponding to 2^i.
+   */
+  std::array<ptr_t, 8> bits;
+  
+  /**
+   * @brief Constructor sets all bits to zero.
+   */
+  ByteArg() {
+    for (int i=0; i<8; i++) {
+      bits[i] = std::make_shared<bool>(false);
+    }
+  }
+};
+
+// Initialization and Implementation of WordArg
+/**
+ * @brief WordArg is a struct to quickly interface between 32 bit inputs and a Word.
+ */
+struct WordArg {
+  /**
+   * @brief bits saves each bit in an array with bits[i] corresponding to 2^i.
+   */
+  std::array<ptr_t,32> bits;
+
+  /**
+   * @brief Constructor sets all bits to zero.
+   */
+  WordArg() {
+    for (int i=0; i<32; i++) {
+      bits[i] = std::make_shared<bool>(false);
+    }
+  }
+};
+
 
 /**
  * @brief BaseGate is the ABC base class of all gates.
@@ -71,6 +113,8 @@ class BaseGate {
     virtual void connect_word_output(ptr32_t) {}
     virtual ptr8_t release_byte_output(io_t) {return this->ground8;}
     virtual ptr32_t release_word_output(io_t) {return this->ground32;}
+    virtual ByteArg release_bytearg_output() {return ByteArg();} // {return this->defaultArgb;}
+    virtual WordArg release_wordarg_output() {return WordArg();} // {return this->defaultArgw;}
     virtual void memory_release() {}
 };
 
