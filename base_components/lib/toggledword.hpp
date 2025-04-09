@@ -9,6 +9,10 @@
 #include "toggledbit.hpp"
 #include "word_maker.hpp"
 #include "word_wire.hpp"
+#include "not.hpp"
+#include "and.hpp"
+#include "wire.hpp"
+#include "or.hpp"
 
 // Header Guards:
 #ifndef TOGGLEDWORD_H
@@ -29,7 +33,7 @@ namespace Virtual{
  * 
  * @test
  */
-class ToggledByte : public byteMicroCircuit<1,1,0,1,11> {
+class ToggledByte : public byteMicroCircuit<1,1,0,1,37> {
   public:
     /**
      * @brief Constructor implements the circuit: splitting the
@@ -71,7 +75,7 @@ class ToggledByte : public byteMicroCircuit<1,1,0,1,11> {
  *
  * @test
  */
-class ToggledWord : public wordMicroCircuit<1,0,1,0,0,1,35> {
+class ToggledWord : public wordMicroCircuit<1,0,1,0,0,1,133> {
   public:
     /**
      * @brief Constructor that creates internal circuitry consisting 

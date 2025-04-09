@@ -1,6 +1,3 @@
-byte_and
-byte_mux
-byte_nand
 byte_neg
 byte_nor
 byte_not
