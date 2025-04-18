@@ -1,0 +1,24 @@
+word_memory.cpp
+word_memory.hpp
+bitmemory.cpp		word_mux.cpp
+bitmemory.hpp		word_mux.hpp
+counter.cpp		word_nand.cpp
+counter.hpp		word_nand.hpp
+delay.cpp		word_neg.cpp
+delay.hpp		word_neg.hpp
+full_adder.cpp		word_nor.cpp
+full_adder.hpp		word_nor.hpp
+half_adder.cpp		word_not.cpp
+half_adder.hpp		word_not.hpp
+program.cpp		word_or.cpp
+program.hpp		word_or.hpp
+toggledbit.cpp		word_output.cpp
+toggledbit.hpp		word_output.hpp
+toggledword.cpp		word_splitter.cpp
+toggledword.hpp		word_splitter.hpp
+word_adder.cpp		word_switch_in.cpp
+word_adder.hpp		word_switch_in.hpp
+word_and.cpp		word_wire.cpp
+word_and.hpp		word_wire.hpp
+word_maker.cpp		wordmicrocircuit.hpp
+word_maker.hpp
