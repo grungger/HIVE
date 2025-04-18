@@ -1,7 +1,3 @@
-byte_neg
-byte_nor
-byte_not
-byte_or
 bytememory
 counter
 program

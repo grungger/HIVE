@@ -5,9 +5,9 @@
  *********************************/
 // Includes:
 #include "wordmicrocircuit.hpp"
-#include "word_splitter.hpp"
-#include "word_maker.hpp"
-#include "neg.hpp"
+#include "not.hpp"
+#include "word_not.hpp"
+#include "word_adder.hpp"
 
 // Header Guards:
 #ifndef WORD_Neg_H

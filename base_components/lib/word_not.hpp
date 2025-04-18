@@ -19,14 +19,13 @@ namespace Virtual{
  * @brief ByteNot implements the bitwise version of 
  *   the logic gate Not for bytes.
  */
-class ByteNot : public byteMicroCircuit<0,2,0,1,11> {
+class ByteNot : public byteMicroCircuit<0,1,0,1,10> {
   public:
     /**
      * @brief Constructor sets the bitwise architecture.
-     * @param inA the first byte input.
-     * @param inB the second byte input.
+     * @param in, the byte input.
      */
-    ByteNot(ptr8_t inA=ground8, ptr8_t inB=ground8);
+    ByteNot(ptr8_t in=ground8);
 
     /**
      * @brief rewire_input ensures the internal circuitry
@@ -42,14 +41,13 @@ class ByteNot : public byteMicroCircuit<0,2,0,1,11> {
  * @brief WordNot implements the bitwise version of
  *   the logic gate Not for words.
  */
-class WordNot : public wordMicroCircuit<0,0,2,0,0,1,35> {
+class WordNot : public wordMicroCircuit<0,0,1,0,0,1,34> {
   public:
     /**
      * @brief Constructor sets the bitwise operators.
-     * @param inA the first input word.
-     * @param inB the second input word.
+     * @param in, the input word.
      */
-    WordNot(ptr32_t inA=ground32, ptr32_t inB=ground32);
+    WordNot(ptr32_t in=ground32);
   
     /**
      * @brief rewire_input ensures the internal circuitry

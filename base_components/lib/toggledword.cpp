@@ -53,6 +53,15 @@ void ToggledByte::connect_byte_output(ptr8_t connected_output) {
   circuit_components_[2]->connect_byte_input(connected_output,0);
 }
 
+void ToggledByte::connect_byte_input(ptr8_t connected8, io_t index) {
+      if (index >= ) {
+        throw std::domain_error("Input that was attempted to connect is out of range");
+      }
+      byte_input_pointers_[index] = connected8;
+      rewire_input();
+    }
+
+
 
 ToggledWord::ToggledWord(ptr32_t input, ptr_t toggle) {
   input_pointers_[0] = toggle;

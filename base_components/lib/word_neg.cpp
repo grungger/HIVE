@@ -8,7 +8,7 @@ ByteNeg::ByteNeg(ptr8_t in) {
   circuit_components_[1] = std::make_shared<Not>(ground);
   circuit_components_[2] = std::make_shared<ByteAdder>(
 				circuit_components_[1]->release_output(0),
-				cicruict_components_[0]->release_byte_output(0),
+				circuit_components_[0]->release_byte_output(0),
 				ground8 );
   byte_output_pointers_[0] = circuit_components_[2]->release_byte_output(0);
 }

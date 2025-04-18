@@ -991,8 +991,8 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ./base_logic/lib ./derived_logic/lib ./circuits/lib
-INPUT                 += ./base_components/lib ./derived_components/lib
+INPUT                  = ./base_logic/lib ./derived_logic/lib
+INPUT                 += ./base_components/lib
 
 # This tag can be used to specify the character encoding of the source files
 # that Doxygen parses. Internally Doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1097,7 +1097,7 @@ RECURSIVE              = NO
 # Note that relative paths are relative to the directory from which Doxygen is
 # run.
 
-EXCLUDE                = ./build
+EXCLUDE                = ./build 
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded

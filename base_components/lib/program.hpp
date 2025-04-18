@@ -1,7 +1,7 @@
 /*******************************************
  * @file program.hpp
  *
- * @brief Implementation of program and wordProgram.
+ * @brief Implementation of ByteProgram and Program.
  *******************************************/
 // Includes:
 #include "wordmicrocircuit.hpp"
@@ -14,14 +14,14 @@
 namespace Virtual{
 
 /**
- * @brief Program saves 8bit instructions to test the computer architecture.
+ * @brief ByteProgram saves 8bit instructions to test the computer architecture.
  *
- * Program saves lines of code in the form of a list of bytes and outputs
+ * ByteProgram saves lines of code in the form of a list of bytes and outputs
  * one byte at a time, corresponding to the location given by the input
  * (the input is usually connected to a counter, in order to walk through
  * the program).
  */
-class Program : public byteMicroCircuit<0,1,0,1,0> {
+class ByteProgram : public byteMicroCircuit<0,1,0,1,0> {
   protected:
     /**
      * @brief code_lines saves the instruction bytes.
@@ -30,10 +30,10 @@ class Program : public byteMicroCircuit<0,1,0,1,0> {
 
   public:
     /**
-     * @brief Constructor for the Program block.
+     * @brief Constructor for the ByteProgram block.
      * @param locator is an input byte that tells the program which instruction to execute.
      */
-    Program(ptr8_t locator=ground8);
+    ByteProgram(ptr8_t locator=ground8);
 
     /**
      * @brief add_lines is a templated function to add code bytes.
@@ -65,14 +65,14 @@ class Program : public byteMicroCircuit<0,1,0,1,0> {
 
 
 /**
- * @brief WordProgram saves word instructions to test the computer architecture.
+ * @brief Program saves word instructions to test the computer architecture.
  *
- * WordProgram saves lines of code in the form of a list of 32bit words and outputs
+ * Program saves lines of code in the form of a list of 32bit words and outputs
  * one word at a time, corresponding to the location given by the input
  * (the input is usually connected to a counter, in order to walk through
  * the program).
  */
-class WordProgram : public wordMicroCircuit<0,1,1,0,0,1,0> {
+class Program : public wordMicroCircuit<0,1,1,0,0,1,0> {
   protected:
     /**
      * @brief code_lines saves the instruction words.
@@ -80,7 +80,7 @@ class WordProgram : public wordMicroCircuit<0,1,1,0,0,1,0> {
     std::vector<word_t> code_lines;
 
     /**
-     * @brief byte_word_bool toggles the WordProgram to either read code addresses
+     * @brief byte_word_bool toggles the Program to either read code addresses
      *   from a byte (byte_word_bool = False) or from a word (byte_word_bool = True)
      *   which allows for longer code_lines to be accessible.
      */
@@ -88,16 +88,16 @@ class WordProgram : public wordMicroCircuit<0,1,1,0,0,1,0> {
 
   public:
     /**
-     * @brief Constructor for WordProgram block with byte input; sets byte_word_bool False.
+     * @brief Constructor for Program block with byte input; sets byte_word_bool False.
      * @param locator is an input byte that tells the program which instruction to execute.
      */
-    WordProgram(ptr8_t locator=ground8);
+    Program(ptr8_t locator=ground8);
 
     /**
-     * @brief Constructor for WordProgram block with word input; sets byte_word_bool True.
+     * @brief Constructor for Program block with word input; sets byte_word_bool True.
      * @param locator is an input word that tells the program which instruction to execute.
      */
-    WordProgram(ptr32_t locator=ground32);
+    Program(ptr32_t locator=ground32);
 
     /**
      * @brief add_lines is a templated function to add code words.
@@ -126,9 +126,6 @@ class WordProgram : public wordMicroCircuit<0,1,1,0,0,1,0> {
      */
     void compute_output();
 };
-
-
-
 
 } //namespace Virtual
 

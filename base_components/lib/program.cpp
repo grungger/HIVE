@@ -2,47 +2,47 @@
 
 namespace Virtual{
 
-Program::Program(ptr8_t locator) {
+ByteProgram::ByteProgram(ptr8_t locator) {
   byte_input_pointers_[0] = locator;
   byte_output_pointers_[0] = std::make_shared<byte_t>(0);
 }
 
-void Program::edit_code(int location, byte_t replacement) {
-  if (location >= code_lines.size()) {
+void ByteProgram::edit_code(int location, byte_t replacement) {
+  if (static_cast<size_t>(location) >= code_lines.size()) {
     throw std::domain_error("Location out of range");
   }
   code_lines[location] = replacement;
 }
 
-void Program::compute_output() {
+void ByteProgram::compute_output() {
   int index = static_cast<int>((*byte_input_pointers_[0]).value);
-  if (index >= code_lines.size()) {
+  if (static_cast<size_t>(index) >= code_lines.size()) {
     throw std::domain_error("Counter value is out of range of program");
   }
   (*byte_output_pointers_[0]) = code_lines[index];
 }
 
 
-WordProgram::WordProgram(ptr8_t locator) {
+Program::Program(ptr8_t locator) {
   byte_input_pointers_[0] = locator;
-  byte_word_bool = False;
+  byte_word_bool = false;
   word_output_pointers_[0] = std::make_shared<word_t>(0);
 }
 
-WordProgram::WordProgram(ptr32_t locator) {
+Program::Program(ptr32_t locator) {
   word_input_pointers_[0] = locator;
-  byte_word_bool = True;
+  byte_word_bool = true;
   word_output_pointers_[0] = std::make_shared<word_t>(0);
 }
 
-void WordProgram::edit_code(int location, word_t replacement) {
-  if (location >= code_lines.size()) {
+void Program::edit_code(int location, word_t replacement) {
+  if (static_cast<size_t>(location) >= code_lines.size()) {
     throw std::domain_error("Location out of range");
   }
   code_lines[location] = replacement;
 }
 
-void WordProgram::compute_output() {
+void Program::compute_output() {
   int index;
   if (byte_word_bool) {
     index = static_cast<int>((*word_input_pointers_[0]).value);
@@ -50,7 +50,7 @@ void WordProgram::compute_output() {
   else {
     index = static_cast<int>((*byte_input_pointers_[0]).value);
   }
-  if (index >= code_lines.size()) {
+  if (static_cast<size_t>(index) >= code_lines.size()) {
     throw std::domain_error("Counter value is out of range of program");
   }
   (*word_output_pointers_[0]) = code_lines[index];
