@@ -25,9 +25,11 @@ WordSwitch_in value(0);
 ByteCounter Bcounter(
 		overwrite.release_output(0),
 		Bvalue.release_byte_output(0) );
+Bcounter.init();
 Counter counter(
 		overwrite.release_output(0),
 		value.release_word_output(0) );
+counter.init();
 
 Bcounter.print_out(); // Expected: 'b0 '
 Counter.print_out(); // Expected: 'bw0 '

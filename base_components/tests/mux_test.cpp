@@ -20,10 +20,12 @@ ByteMUX bmux(
 		toggler.release_output(0),
 		Bval1.release_byte_output(0),
 		Bval2.release_byte_output(0) );
+//bmux.init();
 WordMUX mux(
 		toggler.release_output(0),
 		val1.release_word_output(0),
 		val2.release_word_output(0) );
+//mux.init();
 
 bmux.compute_output();
 mux.compute_output();

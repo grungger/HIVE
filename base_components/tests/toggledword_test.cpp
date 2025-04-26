@@ -22,6 +22,7 @@ std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
 ByteSwitch_in byte_val(1);
 Switch_in toggle_b(false);
 ToggledByte byte(byte_val.release_byte_output(0), toggle_b.release_output(0));
+byte.init();
 byte.print_in(); // Expected: '0b1 '
 byte.print_out(); // Expected: 'b0 '
 byte.compute_output(); 
@@ -36,6 +37,7 @@ byte.print_out(); // Expected: 'b234 '
 WordSwitch_in word_val(3333);
 Switch_in toggle_w(true);
 ToggledWord word(word_val.release_word_output(0), toggle_w.release_output(0));
+word.init();
 word.print_in(); // Expected: '1bw3333 '
 word.print_out(); // Expected: 'bw0 '
 word.compute_output();
@@ -48,6 +50,7 @@ word.print_out(); // Expected: 'bw3333 '
 WordSwitch_in word_val2(14);
 Switch_in toggle_w2(true);
 ToggledWord word2(word_val2.release_word_output(0), toggle_w2.release_output(0));
+word2.init();
 word2.connect_word_output(word.release_word_output(0));
 word2.compute_output();
 word.print_out(); // Expected: 'bw14 '

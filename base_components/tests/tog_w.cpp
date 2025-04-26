@@ -25,7 +25,9 @@ Switch_in tog(false);
 ByteSwitch_in valB(0);
 Not not_g(tog.release_output(0));
 ToggledByte byteA(valA.release_byte_output(0), not_g.release_output(0));
+byteA.init();
 ToggledByte byteB(valB.release_byte_output(0),  tog.release_output(0));
+byteB.init();
 byteA.connect_byte_output(byteB.release_byte_output(0));
 byteA.print_out(); // Expected: 'b0 '
 byteB.print_out(); // Expected: 'b0 '

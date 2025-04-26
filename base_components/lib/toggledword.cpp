@@ -26,7 +26,7 @@ ToggledByte::ToggledByte(ptr8_t input, ptr_t toggle) {
     circuit_components_[x*i+offset+3] = std::make_shared<Wire>(
 				circuit_components_[x*i+offset+2]->release_output(0));
     circuit_components_[35]->connect_input(
-				circuit_components_[x*i+offset+3]->release_output(0), i);
+    				circuit_components_[x*i+offset+3]->release_output(0), i);
 
 
   }
@@ -41,7 +41,7 @@ void ToggledByte::rewire_input() {
   circuit_components_[0]->connect_byte_input(byte_input_pointers_[0], 0);
   circuit_components_[1]->connect_input(input_pointers_[0], 0);
   for (int i=0; i<8; i++) {
-    circuit_components_[4*i+3]->connect_input(input_pointers_[0], 0);
+    circuit_components_[4*i+3]->connect_input(input_pointers_[0], 1);
   }
 }
 
@@ -52,15 +52,6 @@ void ToggledByte::connect_byte_output(ptr8_t connected_output) {
 				connected_output);
   circuit_components_[2]->connect_byte_input(connected_output,0);
 }
-
-void ToggledByte::connect_byte_input(ptr8_t connected8, io_t index) {
-      if (index >= ) {
-        throw std::domain_error("Input that was attempted to connect is out of range");
-      }
-      byte_input_pointers_[index] = connected8;
-      rewire_input();
-    }
-
 
 
 ToggledWord::ToggledWord(ptr32_t input, ptr_t toggle) {
@@ -99,7 +90,7 @@ void ToggledWord::rewire_input() {
   circuit_components_[0]->connect_word_input(word_input_pointers_[0], 0);
   circuit_components_[1]->connect_input(input_pointers_[0], 0);
   for (int i=0; i<32; i++) {
-    circuit_components_[4*i+3]->connect_input(input_pointers_[0], 0);
+    circuit_components_[4*i+3]->connect_input(input_pointers_[0], 1);
   }
 }
 

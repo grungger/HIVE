@@ -34,7 +34,7 @@ WordMUX::WordMUX(ptr_t toggler, ptr32_t inA, ptr32_t inB) {
   circuit_components_[2] = std::make_shared<ToggledWord>(inB, toggler);
   word_output_pointers_[0] = circuit_components_[2]->release_word_output(0);
   circuit_components_[1]->connect_word_output(
-				circuit_components_[2]->release_word_output(0) );
+  				circuit_components_[2]->release_word_output(0) );
 }
 
 void WordMUX::rewire_input() {

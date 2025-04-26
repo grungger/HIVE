@@ -62,7 +62,7 @@ class microCircuit : public Gate<N_in, N_out> {
      * @brief Virtual member function that ensures the sub-gates are connected to
      *   the input bits listed in the input_pointers_ array.
      */
-    virtual void rewire_input() {};
+    virtual void rewire_input() = 0;
 
     /**
      * @brief Overloaded member function of Gate-class to run the same function for

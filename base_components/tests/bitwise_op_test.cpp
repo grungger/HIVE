@@ -68,6 +68,7 @@ b_nor.print_out(); // Expected: 'b228 '
 b_or.print_out(); // Expected: 'b27 '
 b_neg.print_out(); // Expected: 'b229 '
 b_not.print_out(); // Expected: 'b228 '
+std::cout << "\n";
 
 inB.change_state(22); // 16 4 2
 b_add.compute_output();
@@ -103,6 +104,7 @@ b_nor.print_out(); // Expected: 'b0 '
 b_or.print_out(); // Expected: 'b255 '
 b_neg.print_out(); // Expected: 'b1 '
 b_not.print_out(); // Expected: 'b0 '
+std::cout << "\n";
 
 Switch_in inbit2(false);
 WordSwitch_in inwA(0);
@@ -127,6 +129,7 @@ w_nor.print_out(); // Expected: 'bw4294967295 '
 w_or.print_out(); // Expected: 'bw0 '
 w_neg.print_out(); // Expected: 'bw0 '
 w_not.print_out(); // Expected: 'bw4294967295 '
+std::cout << "\n";
 
 inwA.change_state(19); // 16 2 1
 w_add.compute_output();
@@ -146,6 +149,7 @@ w_nor.print_out(); // Expected: 'bw4294967276 '
 w_or.print_out(); // Expected: 'bw19 '
 w_neg.print_out(); // Expected: 'bw4294967277 '
 w_not.print_out(); // Expected: 'bw4294967276 '
+std::cout << "\n";
 
 inwB.change_state(3); // 2 1
 w_add.compute_output();
@@ -161,6 +165,7 @@ w_mux.print_out(); // Expected: 'bw19 '
 w_nand.print_out(); // Expected: 'bw4294967292 '
 w_nor.print_out(); // Expected: 'bw4294967276 '
 w_or.print_out(); // Expected: 'bw19 '
+std::cout << "\n";
 
 inbit2.change_state(true);
 inwA.change_state(4294967294); // max - 1
@@ -186,11 +191,11 @@ std::cout.rdbuf(old);
 
 std::string capturedOutput = buffer.str();
 std::string expectedOutput = std::string(
-		"0b0 b0 b0 b255 b255 b0 b0 b255 0b27 b0 b27 b255 b228 b27 b229 b228 ") + 
-		"0b49 b18 b27 b237 b224 b31 1b22 b22 b22 b233 b0 b255 b1 b0 " + 
-		"0bw0 bw0 bw0 bw4294967295 bw4294967295 bw0 bw0 bw4294967295 " + 
-		"0bw19 bw0 bw19 bw4294967295 bw4294967276 bw19 bw4294967277 bw4294967276 " +
-		"0bw22 bw3 bw19 bw4294967292 bw4294967276 bw19 " + 
+		"0b0 b0 b0 b255 b255 b0 b0 b255 0b27 b0 b27 b255 b228 b27 b229 b228 \n") + 
+		"0b49 b18 b27 b237 b224 b31 1b22 b22 b22 b233 b0 b255 b1 b0 \n" + 
+		"0bw0 bw0 bw0 bw4294967295 bw4294967295 bw0 bw0 bw4294967295 \n" + 
+		"0bw19 bw0 bw19 bw4294967295 bw4294967276 bw19 bw4294967277 bw4294967276 \n" +
+		"0bw22 bw3 bw19 bw4294967292 bw4294967276 bw19 \n" + 
 		"1bw2 bw2 bw3 bw4294967293 bw0 bw4294967295 bw2 bw1 ";
 
 if (capturedOutput != expectedOutput) {

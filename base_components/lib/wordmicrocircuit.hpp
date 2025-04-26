@@ -192,7 +192,15 @@ class byteMicroCircuit : public microCircuit<Nbit_in, Nbit_out, N_comp> {
      *   either bit or byte input pointers change, the internal circuitry
      *   connected to the input is updated.
      */
-    virtual void rewire_input() {};
+    virtual void rewire_input() {}
+    
+    /**
+     * @brief init is a sort of fix for an issue with inheritance that prevents
+     *   the use of a derived class virtual method inside its constructor - 
+     *   gates which require the additional setup with init after the constructor
+     *   finished running will be clearly indicated in the documentation.
+     */
+    virtual void init() {}
  
     /**
      * @brief connect_byte_input assigns the index-th byte input to connected8.
@@ -205,7 +213,7 @@ class byteMicroCircuit : public microCircuit<Nbit_in, Nbit_out, N_comp> {
         throw std::domain_error("Input that was attempted to connect is out of range");
       }
       byte_input_pointers_[index] = connected8;
-      rewire_input();
+      this->rewire_input();
     }
 
     /**
