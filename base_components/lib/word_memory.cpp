@@ -17,6 +17,7 @@ ByteMemory::ByteMemory(ptr_t load, ptr_t save, ptr8_t value) {
   circuit_components_[10] = std::make_shared<ToggledByte>(
 				circuit_components_[9]->release_byte_output(0),
 				load );
+  circuit_components_[10]->init();
   byte_output_pointers_[0] = circuit_components_[10]->release_byte_output(0);
 }
 
@@ -61,6 +62,7 @@ WordMemory::WordMemory(ptr_t load, ptr_t save, ptr32_t value) {
   circuit_components_[34] = std::make_shared<ToggledWord>(
 				circuit_components_[33]->release_word_output(0),
 				load );
+  circuit_components_[34]->init();
   word_output_pointers_[0] = circuit_components_[34]->release_word_output(0);
 }
 

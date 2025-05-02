@@ -35,7 +35,7 @@ class ByteCounter : public byteMicroCircuit<1,1,0,1,4> {
      * @brief rewire_input ensures the internal circuitry is conserved,
      *   if the input pointers changed.
      */
-    void rewire_input() override;
+    void rewire_input();
 
     static const std::string gate_name;
 
@@ -70,7 +70,7 @@ class Counter : public wordMicroCircuit<1,0,1,0,0,1,4> {
      * @brief rewire_input ensures the internal circuitry is conserved,
      *   if the input pointers changed.
      */
-    void rewire_input() override;
+    void rewire_input();
 
     static const std::string gate_name;
 

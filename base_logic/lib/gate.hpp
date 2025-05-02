@@ -52,7 +52,8 @@ class BaseGate {
     virtual void print_in() = 0;
     virtual void print_out() = 0;
     virtual void print_components() {}
-    virtual void rewire_inputs() {}
+    virtual void rewire_input() {}
+    virtual void init() {}
     virtual void connect_input(ptr_t,io_t) = 0;
     virtual void connect_byte_input(ptr32_t,io_t) {}
     virtual ptr_t release_output(io_t) = 0;
