@@ -2,15 +2,17 @@
 
 namespace Virtual{
 
-ToggledBit::ToggledBit(ptr_t conIn, ptr_t conTog) {
+ToggledBit::ToggledBit(ptr_t conIn, ptr_t conTog, bool write0) {
   input_pointers_[0] = conIn;
   input_pointers_[1] = conTog;
+  this->write0_ = write0;
   circuit_components_[0] = std::make_shared<Not>(conTog);
   circuit_components_[1] = std::make_shared<And>(conIn, conTog);
   circuit_components_[2] = std::make_shared<Wire>();
-  circuit_components_[3] = std::make_shared<And>(
+  circuit_components_[3] = std::make_shared<And3>(
 			circuit_components_[0]->release_output(0),
-			circuit_components_[2]->release_output(0));
+			circuit_components_[2]->release_output(0),
+			std::make_shared<bool>(!(this->write0_)));
   circuit_components_[4] = std::make_shared<Or>(
 			circuit_components_[1]->release_output(0),
 			circuit_components_[3]->release_output(0));

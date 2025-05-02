@@ -7,6 +7,7 @@
 #include "microcircuit.hpp"
 #include "not.hpp"
 #include "and.hpp"
+#include "and3.hpp"
 #include "wire.hpp"
 #include "or.hpp"
 
@@ -44,6 +45,12 @@ namespace Virtual{
  *   in toggledbit_test.
  */
 class ToggledBit : public microCircuit<2,1,6>  {
+  private:
+    /**
+     * @brief write0_ chooses whether toggled bit should write 0 if not
+     *   toggled (true) or do nothing (false).
+     */
+    bool write0_;
   public:
     /**
      * @brief Constructor for the ToggledBit gate, creates the internal circuitry and
@@ -51,8 +58,9 @@ class ToggledBit : public microCircuit<2,1,6>  {
      *   an Or gate.
      * @param conIn the first input bit - the value to overwrite the output with.
      * @param conTog the second input bit - the toggling bit.
+     * @param write0 sets write0_ variable.
      */
-    ToggledBit(ptr_t conIn=ground, ptr_t conTog=ground);
+    ToggledBit(ptr_t conIn=ground, ptr_t conTog=ground, bool write0=false);
 
     static const std::string gate_name;
 
