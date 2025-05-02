@@ -103,11 +103,14 @@ class Circuit {
         (*it)->compute_output();
       }
       for (auto it=byte_cout_.begin(); it!=byte_cout_.end(); it++) {
+        std::cout << 'b';
         (*it)->compute_output();
       }
       for (auto it=word_cout_.begin(); it!=word_cout_.end(); it++) {
+        std::cout << 'w';
         (*it)->compute_output();
       }
+      std::cout << ' ';
     }
 
     void tick(std::vector<bool> bit_in) {
@@ -197,6 +200,37 @@ class Circuit {
       std::cout << ' ';
     }
 
+    void tick(	std::vector<bool> bit_in,
+		std::vector<std::uint8_t> byte_in) {
+      for (auto it=memory_components_.begin(); it!=memory_components_.end(); it++) {
+        (*it)->memory_release();
+      }
+      assert(bit_in.size()<=(this->bit_cin_).size());
+      auto bit_it = bit_cin_.begin();
+      for (auto it=bit_in.begin(); it!=bit_in.end(); it++) {
+        (*bit_it)->change_state(*it);
+        bit_it++;
+      }
+      assert(byte_in.size()<=(this->byte_cin_).size());
+      auto byte_it = byte_cin_.begin();
+      for (auto it=byte_in.begin(); it!=byte_in.end(); it++) {
+        (*byte_it)->change_state(*it);
+        byte_it++;
+      }
+      // Run all components:
+      for (auto it=components_.begin(); it!=components_.end(); it++) {
+        (*it)->compute_output();
+      }
+      // Print outputs:
+      for (auto it=bit_cout_.begin(); it!=bit_cout_.end(); it++) {
+        (*it)->compute_output();
+      }
+      for (auto it=byte_cout_.begin(); it!=byte_cout_.end(); it++) {
+        std::cout << 'b';
+        (*it)->compute_output();
+      }
+      std::cout << ' ';
+    }
 
 };
 
