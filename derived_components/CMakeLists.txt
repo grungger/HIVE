@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.15)
+
+project(derivedComponents)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_compile_options(-Wall -Wpedantic -Wextra)
+
+add_subdirectory(lib)
+
+add_executable(source_dest_decoder_test tests/source_dest_decoder_test.cpp)
+add_executable(conditional_unit_test tests/conditional_unit_test.cpp)
+add_executable(register_plus_test tests/register_plus_test.cpp)
+add_executable(arithmetic_logic_unit_test tests/arithmetic_logic_unit_test.cpp)
+
+target_link_libraries(source_dest_decoder_test PRIVATE derivedcomponentsLib basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(conditional_unit_test PRIVATE derivedcomponentsLib basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(register_plus_test PRIVATE derivedcomponentsLib basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(arithmetic_logic_unit_test PRIVATE derivedcomponentsLib basecomponentsLib derivedlogicLib baselogicLib)
+
+add_test(NAME source_dest_decoder_testexe COMMAND source_dest_decoder_test)
+add_test(NAME conditional_unit_testexe COMMAND conditional_unit_test)
+add_test(NAME register_plus_testexe COMMAND register_plus_test)
+add_test(NAME arithmetic_logic_unit_testexe COMMAND arithmetic_logic_unit_test)

@@ -41,37 +41,37 @@ class LittleBox : public Circuit<4,1,0,0,1,0> {
       this->components_.push_back(
 		std::make_shared<ToggledBit>(
 			(this->bit_cin_[0])->release_output(0),
-			(this->components_[2])->release_output(0)));
+			(this->components_[2])->release_output(0),true));
       this->components_.push_back(
 		std::make_shared<ToggledBit>(
 			(this->bit_cin_[0])->release_output(0),
-			(this->components_[3])->release_output(0)));
+			(this->components_[3])->release_output(0),true));
       this->components_.push_back(
 		std::make_shared<ToggledBit>(
 			(this->bit_cin_[0])->release_output(0),
-			(this->components_[4])->release_output(0)));
+			(this->components_[4])->release_output(0),true));
       this->components_.push_back(
 		std::make_shared<ToggledBit>(
 			(this->bit_cin_[0])->release_output(0),
-			(this->components_[5])->release_output(0)));
+			(this->components_[5])->release_output(0),true));
       // Save toggles
       // Components 10 - 13
       this->components_.push_back(
 		std::make_shared<ToggledBit>(
 			(this->bit_cin_[1])->release_output(0),
-			(this->components_[2])->release_output(0)));
+			(this->components_[2])->release_output(0),true));
       this->components_.push_back(
 		std::make_shared<ToggledBit>(
 			(this->bit_cin_[1])->release_output(0),
-			(this->components_[3])->release_output(0)));
+			(this->components_[3])->release_output(0),true));
       this->components_.push_back(
 		std::make_shared<ToggledBit>(
 			(this->bit_cin_[1])->release_output(0),
-			(this->components_[4])->release_output(0)));
+			(this->components_[4])->release_output(0),true));
       this->components_.push_back(
 		std::make_shared<ToggledBit>(
 			(this->bit_cin_[1])->release_output(0),
-			(this->components_[5])->release_output(0)));
+			(this->components_[5])->release_output(0),true));
       // Memory registers
       // Component 14:
       this->components_.push_back(

@@ -11,6 +11,7 @@
 #include "word_wire.hpp"
 #include "not.hpp"
 #include "and.hpp"
+#include "and3.hpp"
 #include "wire.hpp"
 #include "or.hpp"
 
@@ -34,15 +35,22 @@ namespace Virtual{
  * @test
  */
 class ToggledByte : public byteMicroCircuit<1,1,0,1,37> {
+  private:
+    /**
+     * @brief write0_ chooses whether toggled bit should write 0 if not
+     *   toggled (true) or do nothing (false).
+     */
+    bool write0_;
   public:
     /**
      * @brief Constructor implements the circuit: splitting the
      *   input byte into bits and performing bitwise "toggling".
      * @param input the byte that is used to overwrite the memory.
      * @param toggle the toggling bit, overwriting is done if toggle=1.
+     * @param write0 sets write0_ variable.
      * @note the byte input "input" is obsolete if toggle = False.
      */
-    ToggledByte(ptr8_t input=ground8, ptr_t toggle=ground);
+    ToggledByte(ptr8_t input=ground8, ptr_t toggle=ground, bool write0=false);
 
     static const std::string gate_name;
     
@@ -76,6 +84,12 @@ class ToggledByte : public byteMicroCircuit<1,1,0,1,37> {
  * @test
  */
 class ToggledWord : public wordMicroCircuit<1,0,1,0,0,1,133> {
+  private:
+    /**
+     * @brief write0_ chooses whether toggled bit should write 0 if not
+     *   toggled (true) or do nothing (false).
+     */
+    bool write0_;
   public:
     /**
      * @brief Constructor that creates internal circuitry consisting 
@@ -83,7 +97,7 @@ class ToggledWord : public wordMicroCircuit<1,0,1,0,0,1,133> {
      * @param word_input the input to overwrite with.
      * @param toggle the toggling bit.
      */
-    ToggledWord(ptr32_t word_input=ground32, ptr_t toggle=ground);
+    ToggledWord(ptr32_t word_input=ground32, ptr_t toggle=ground, bool write0=false);
 
     static const std::string gate_name;
 

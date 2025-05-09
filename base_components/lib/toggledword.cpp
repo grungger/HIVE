@@ -2,9 +2,10 @@
 
 namespace Virtual{
 
-ToggledByte::ToggledByte(ptr8_t input, ptr_t toggle) {
+ToggledByte::ToggledByte(ptr8_t input, ptr_t toggle, bool write0) {
   input_pointers_[0] = toggle;
   byte_input_pointers_[0] = input;
+  this->write0_ = write0;
   circuit_components_[0] = std::make_shared<ByteSplitter>(input);
   circuit_components_[1] = std::make_shared<Not>(toggle);
   circuit_components_[35] = std::make_shared<ByteMaker>();
@@ -17,9 +18,10 @@ ToggledByte::ToggledByte(ptr8_t input, ptr_t toggle) {
   for (int i=0; i<8; i++) {
     circuit_components_[x*i+offset] = std::make_shared<And>(
 				circuit_components_[0]->release_output(i), toggle);
-    circuit_components_[x*i+offset+1] = std::make_shared<And>(
+    circuit_components_[x*i+offset+1] = std::make_shared<And3>(
 				circuit_components_[1]->release_output(0),
-				circuit_components_[2]->release_output(i));
+				circuit_components_[2]->release_output(i),
+				std::make_shared<bool>(!(this->write0_)));
     circuit_components_[x*i+offset+2] = std::make_shared<Or>(
 				circuit_components_[x*i+offset]->release_output(0),
 				circuit_components_[x*i+offset+1]->release_output(0));
@@ -54,9 +56,10 @@ void ToggledByte::connect_byte_output(ptr8_t connected_output) {
 }
 
 
-ToggledWord::ToggledWord(ptr32_t input, ptr_t toggle) {
+ToggledWord::ToggledWord(ptr32_t input, ptr_t toggle, bool write0) {
   input_pointers_[0] = toggle;
   word_input_pointers_[0] = input;
+  this->write0_ = write0;
   circuit_components_[0] = std::make_shared<WordSplitter>(input);
   circuit_components_[1] = std::make_shared<Not>(toggle);
   circuit_components_[131] = std::make_shared<WordMaker>();
@@ -69,9 +72,10 @@ ToggledWord::ToggledWord(ptr32_t input, ptr_t toggle) {
   for (int i=0; i<32; i++) {
     circuit_components_[x*i+offset] = std::make_shared<And>(
 				circuit_components_[0]->release_output(i), toggle);
-    circuit_components_[x*i+offset+1] = std::make_shared<And>(
+    circuit_components_[x*i+offset+1] = std::make_shared<And3>(
 				circuit_components_[1]->release_output(0),
-				circuit_components_[2]->release_output(i));
+				circuit_components_[2]->release_output(i),
+				std::make_shared<bool>(!(this->write0_)));
     circuit_components_[x*i+offset+2] = std::make_shared<Or>(
 				circuit_components_[x*i+offset]->release_output(0),
 				circuit_components_[x*i+offset+1]->release_output(0));

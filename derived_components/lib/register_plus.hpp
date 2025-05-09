@@ -1,0 +1,47 @@
+/**********************************
+ * @file register_plus.hpp
+ *
+ * @brief Implementation of RegisterPlus.
+ **********************************/
+// Includes:
+#include "wordmicrocircuit.hpp"
+#include "word_memory.hpp"
+#include "not.hpp"
+#include "toggledword.hpp"
+
+// Header Guards:
+#ifndef REGISTER_PLUS_H
+#define REGISTER_PLUS_H
+
+namespace Virtual{
+
+/**
+ * @brief RegisterPlus can save an input byte for arbitrarily long time.
+ */
+class RegisterPlus : public byteMicroCircuit<2,1,0,2,3> {
+  public:
+    /**
+     * @brief Constructor sets inputs and implements circuitry.
+     * @param load activates the byte output to write the current save value.
+     * @param save overwrites the save value with the byte value input
+     * @param value the byte value to overwrite with.
+     */
+    RegisterPlus(ptr_t load=ground, ptr_t save=ground, ptr8_t value=ground8);
+
+    /**
+     * @brief rewire_input updates the input to ensure the internal circuitry
+     *   is conserved if inputs are changed.
+     */
+    void rewire_input();
+
+    /**
+     * @brief memory_release simply releases the delay output.
+     */
+    void memory_release();
+
+    static const std::string gate_name;
+};
+
+} //namespace Virtual
+
+#endif

@@ -20,8 +20,6 @@ add_executable(tog_w tests/tog_w.cpp)
 add_executable(wordmemory_test tests/wordmemory_test.cpp)
 add_executable(mux_test tests/mux_test.cpp)
 
-add_executable(counter_test base_components_tests/counter_test.cpp)
-
 target_link_libraries(toggledbit_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(bitmemory_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(hf_adder_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
@@ -32,10 +30,6 @@ target_link_libraries(bitwise_op_test PRIVATE basecomponentsLib derivedlogicLib 
 target_link_libraries(tog_w PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(wordmemory_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(mux_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
-
-target_link_libraries(counter_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
-
-install(TARGETS counter_test DESTINATION bin)
 
 add_test(NAME toggledbit_testexe COMMAND toggledbit_test)
 add_test(NAME bitmemory_testexe COMMAND bitmemory_test)
