@@ -117,6 +117,7 @@ class BaseGate {
     virtual ByteArg release_bytearg_output() {return ByteArg();} // {return this->defaultArgb;}
     virtual WordArg release_wordarg_output() {return WordArg();} // {return this->defaultArgw;}
     virtual void memory_release() {}
+    virtual void add_lines(std::vector<std::uint8_t>) {}
 };
 
 /**

@@ -29,6 +29,11 @@ void RegisterPlus::memory_release() {
   circuit_components_[2]->compute_output();
 }
 
+void RegisterPlus::connect_byte_output(ptr8_t conOut) {
+  byte_output_pointers_[0] = conOut;
+  circuit_components_[2]->connect_byte_output(conOut);
+}
+
 const std::string RegisterPlus::gate_name = "RegisterPlus";
 
 } //namespace Virtual

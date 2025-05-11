@@ -39,6 +39,11 @@ class RegisterPlus : public byteMicroCircuit<2,1,0,2,3> {
      */
     void memory_release();
 
+    /**
+     * @brief connect_byte_output reroutes the toggledbyte method to the outer shell.
+     */
+    void connect_byte_output(ptr8_t conOut);
+
     static const std::string gate_name;
 };
 
