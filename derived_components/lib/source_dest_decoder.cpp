@@ -5,14 +5,17 @@ namespace Virtual{
 SourceDestDecoder::SourceDestDecoder(ptr8_t input) {
   byte_input_pointers_[0] = input;
   circuit_components_[0] = std::make_shared<ByteSplitter>(input);
+  // D0 through D7
   circuit_components_[1] = std::make_shared<ThreeBitDecoder>(
 				circuit_components_[0]->release_output(0),
 				circuit_components_[0]->release_output(1),
 				circuit_components_[0]->release_output(2));
+  // S0 through S7
   circuit_components_[2] = std::make_shared<ThreeBitDecoder>(
 				circuit_components_[0]->release_output(3),
 				circuit_components_[0]->release_output(4),
 				circuit_components_[0]->release_output(5));
+  // 0 = Immediate, 1 = Calculate, 2 = Copy, 3 = Condition
   circuit_components_[3] = std::make_shared<ThreeBitDecoder>();
   circuit_components_[3]->connect_input(
 				circuit_components_[0]->release_output(6), 0);

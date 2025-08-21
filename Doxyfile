@@ -992,7 +992,8 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = ./base_logic/lib ./derived_logic/lib
-INPUT                 += ./base_components/lib
+INPUT                 += ./base_components/lib ./derived_components/lib
+INPUT                 += ./Turing_Complete
 
 # This tag can be used to specify the character encoding of the source files
 # that Doxygen parses. Internally Doxygen uses the UTF-8 encoding. Doxygen uses

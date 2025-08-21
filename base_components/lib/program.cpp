@@ -17,6 +17,7 @@ void ByteProgram::edit_code(int location, byte_t replacement) {
 void ByteProgram::compute_output() {
   int index = static_cast<int>((*byte_input_pointers_[0]).value);
   if (static_cast<size_t>(index) >= code_lines.size()) {
+    std::cout << "Counter: " << index << ", code_line size: " << code_lines.size();
     throw std::domain_error("Counter value is out of range of program");
   }
   (*byte_output_pointers_[0]) = code_lines[index];

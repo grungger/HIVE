@@ -36,12 +36,10 @@ class ByteProgram : public byteMicroCircuit<0,1,0,1,0> {
     ByteProgram(ptr8_t locator=ground8);
 
     /**
-     * @brief add_lines is a templated function to add code bytes.
-     * @tparam Container is any iterable container containing byte_t values.
+     * @brief add_lines is a function to add code bytes.
      * @param container the new code lines to be added.
      */
-    template <typename Container>
-    void add_lines(const Container& container) {
+    void add_lines(const std::vector<std::uint8_t>& container) {
       for(auto it=container.begin(); it<container.end(); it++) {
         code_lines.push_back(*it);
       }

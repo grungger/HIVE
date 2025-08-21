@@ -219,8 +219,7 @@ class MagnumOpus : public Circuit<0,1,0,0,1,0> {
 			this->components_[22]->release_byte_output(0), 0);
     }
 
-    template <typename Container>
-    void add_lines(const Container& container) {
+    void add_lines(const std::vector<std::uint8_t>& container) {
       this->components_[1]->add_lines(container);
     }
     
@@ -228,18 +227,40 @@ class MagnumOpus : public Circuit<0,1,0,0,1,0> {
       this->inputs = vals;
     }
     void tick() {
+      byte_cin_[0]->change_state(inputs[0]);
+      int counting = 0;
+      std::cout << "Mem release ";
       for (auto it=memory_components_.begin(); it!=memory_components_.end(); it++) {
         (*it)->memory_release();
+	(*it)->print_in();
+	(*it)->print_out();
+	std::cout << std::endl;
       }
       // Run all components:
+      // std::cout << "CompRun ";
       for (auto it=components_.begin(); it!=components_.end(); it++) {
+	std::cout << "C" << counting++;
         (*it)->compute_output();
+	std::cout << "in";
+	(*it)->print_in();
+	std::cout << "out";
+	(*it)->print_out();
+	std::cout << std::endl;
       }
       // Print memory:
+      //std::cout << "Program";
+      //components_[1]->print_out();
+      //std::cout << " ";
+      //int comp_index = 2;
+      //std::cout << "C" << comp_index;
+      //components_[comp_index]->print_out();
+      std::cout << "Mem";
       for (auto it=memory_components_.begin(); it!=memory_components_.end(); it++) {
+	std::cout << (*it)->gate_name;
         (*it)->print_out();
       }
       // Print outputs:
+      std::cout << "Out";
       for (auto it=byte_cout_.begin(); it!=byte_cout_.end(); it++) {
         (*it)->compute_output();
       }
@@ -256,9 +277,13 @@ int main() {
 
 MagnumOpus circuit = MagnumOpus();
 std::vector<std::uint8_t> program{5, 130, 177, 68, 158};
-std::vector<std::uint8_t> input{153, 153, 153, 153, 153};
+std::vector<std::uint8_t> input{69};
 circuit.add_lines(program);
-std::cout << "Error after addlines";
+circuit.set_input_vals(input);
+circuit.tick();
+circuit.tick();
+circuit.tick();
+circuit.tick();
 circuit.tick();
 
 //std::cout.rdbuf(old);
