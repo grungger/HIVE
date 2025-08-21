@@ -104,119 +104,150 @@ class MagnumOpus : public Circuit<0,1,0,0,1,0> {
 		 std::make_shared<And>(
 			 (this->components_[2])->release_output(6),
 			 (this->components_[2])->release_output(18)));
-      // C14 ByteMUX (immediate uncon(global out) Program) -> save value Reg0
-      this->components_.push_back(
-		 std::make_shared<ByteMUX>());
-      this->components_[14]->connect_input(
-			 (this->components_[2])->release_output(16), 0);
-      this->components_[14]->connect_byte_input(
-		         (this->components_[1])->release_byte_output(0), 1);
-      // C15 ByteMUX (calculate uncon(global out) uncon(ALU)) -> save value Reg3
-      this->components_.push_back(
-		  std::make_shared<ByteMUX>());
-      this->components_[15]->connect_input(
-		         (this->components_[2])->release_output(17), 0);
-      // C16 RegisterPlus (Reg0)
-      this->components_.push_back(
-		  std::make_shared<RegisterPlus>(
-			 (this->components_[3])->release_output(0),
-			 (this->components_[6])->release_output(0),
-			 (this->components_[14])->release_byte_output(0)));
-      this->memory_components_.push_back(this->components_[16]);
-      //// C16 toggled output is now the universal output->connect all necessary:
-      this->components_[14]->connect_byte_input(
-		      (this->components_[16])->release_byte_output(0), 0);
-      this->components_[15]->connect_byte_input(
-		      (this->components_[16])->release_byte_output(0), 0);
-      // C17 RegisterPlus (Reg1)
-      this->components_.push_back(
-		  std::make_shared<RegisterPlus>(
-			  (this->components_[2])->release_output(9),
-			  (this->components_[7])->release_output(0),
-			  (this->components_[16])->release_byte_output(0)));
-      this->components_[17]->connect_byte_output(
-		      (this->components_[16])->release_byte_output(0));
-      this->memory_components_.push_back(this->components_[17]);
-      // C18 RegisterPlus (Reg2)
-      this->components_.push_back(
-		      std::make_shared<RegisterPlus>(
-			      (this->components_[2])->release_output(10),
-			      (this->components_[8])->release_output(0),
-			      (this->components_[16])->release_byte_output(0)));
-      this->components_[18]->connect_byte_output(
-		      this->components_[16]->release_byte_output(0));
-      this->memory_components_.push_back(this->components_[18]);
-      // C19 RegisterPlus (Reg3)
-      this->components_.push_back(
-		      std::make_shared<RegisterPlus>(
-			      (this->components_[2])->release_output(11),
-			      (this->components_[10])->release_output(0),
-			      (this->components_[15])->release_byte_output(0)));
-      this->components_[19]->connect_byte_output(
-		      this->components_[16]->release_byte_output(0));
-      this->memory_components_.push_back(this->components_[19]);
-      // C20 RegisterPlus (Reg4)
-      this->components_.push_back(
-		      std::make_shared<RegisterPlus>(
-			      (this->components_[2])->release_output(12),
-			      (this->components_[11])->release_output(0),
-			      (this->components_[16])->release_byte_output(0)));
-      this->components_[20]->connect_byte_output(
-		      this->components_[16]->release_byte_output(0));
-      this->memory_components_.push_back(this->components_[20]);
-      // C21 RegisterPlus (Reg5)
-      this->components_.push_back(
-		      std::make_shared<RegisterPlus>(
-			      (this->components_[2])->release_output(13),
-			      (this->components_[12])->release_output(0),
-			      (this->components_[16])->release_byte_output(0)));
-      this->components_[21]->connect_byte_output(
-		      this->components_[16]->release_byte_output(0));
-      this->memory_components_.push_back(this->components_[21]);
-      // C22 ToggledByte for Output
-      this->components_.push_back(
-		      std::make_shared<ToggledByte>(
-			      (this->components_[16])->release_byte_output(0),
-			      (this->components_[13])->release_output(0), true));
-      // C23 And (Copy S6)
+      // Revision 2: we need to run Input before ByteMUX to reg0
+      // C14(24(23)) And (Copy S6)
       this->components_.push_back(
 		      std::make_shared<And>(
 			      (this->components_[2])->release_output(18),
 			      (this->components_[2])->release_output(14)));
-      // C24 ToggledByte for Input
+      // C15(25(24)) ToggledByte for Input
       this->components_.push_back(
 		      std::make_shared<ToggledByte>(
 			      (this->byte_cin_[0])->release_byte_output(0),
-			      (this->components_[23])->release_output(0)));
+			      (this->components_[14])->release_output(0)));
+      // this->components_[15]->connect_byte_output(
+	//	      (this->components_[17])->release_byte_output(0));
+      // C16((14)) ByteMUX (immediate uncon(global out) Program) -> save value Reg0
+      this->components_.push_back(
+		 std::make_shared<ByteMUX>());
+      this->components_[16]->connect_input(
+			 (this->components_[2])->release_output(16), 0);
+      this->components_[16]->connect_byte_input(
+		         (this->components_[1])->release_byte_output(0), 1);
+      // Revision 1: We need to run ALU before the following MUX so it was moved to here at position C15, i added old nr in brackets for all below to correct
+      // C17(15(27)) ArithmeticLogicUnit (Program uncon(Reg1) uncon(Reg2))
+      this->components_.push_back(
+      		      std::make_shared<ArithmeticLogicUnit>());
+      this->components_[17]->connect_byte_input(
+			      (this->components_[1])->release_byte_output(0), 0);
+			      // (this->components_[17])->release_byte_output(1),
+			      // (this->components_[18])->release_byte_output(1)));
+      // C18(16(15)) ByteMUX (calculate uncon(global out) ALU) -> save value Reg3
+      this->components_.push_back(
+		  std::make_shared<ByteMUX>());
+      this->components_[18]->connect_input(
+		         (this->components_[2])->release_output(17), 0);
+      this->components_[18]->connect_byte_input(
+		         (this->components_[17])->release_byte_output(0), 1);
+      // C19(17(16)) RegisterPlus (Reg0)
+      this->components_.push_back(
+		  std::make_shared<RegisterPlus>(
+			 (this->components_[3])->release_output(0),
+			 (this->components_[6])->release_output(0),
+			 (this->components_[16])->release_byte_output(0)));
+      this->memory_components_.push_back(this->components_[19]);
+      //// C19(17(16)) toggled output is now the universal output->connect all necessary:
+      this->components_[15]->connect_byte_output(
+		      (this->components_[19])->release_byte_output(0));
+      this->components_[16]->connect_byte_input(
+		      (this->components_[19])->release_byte_output(0), 0);
+      this->components_[18]->connect_byte_input(
+		      (this->components_[19])->release_byte_output(0), 0);
+      // C20(18(17)) RegisterPlus (Reg1)
+      this->components_.push_back(
+		  std::make_shared<RegisterPlus>(
+			  (this->components_[2])->release_output(9),
+			  (this->components_[7])->release_output(0),
+			  (this->components_[19])->release_byte_output(0)));
+      this->components_[20]->connect_byte_output(
+		      (this->components_[19])->release_byte_output(0));
+      this->memory_components_.push_back(this->components_[20]);
+      // Connect C17(15) ALU input 1 with Reg1 
+      this->components_[17]->connect_byte_input(
+		      (this->components_[20])->release_byte_output(1), 1);
+      // C21(19(18)) RegisterPlus (Reg2)
+      this->components_.push_back(
+		      std::make_shared<RegisterPlus>(
+			      (this->components_[2])->release_output(10),
+			      (this->components_[8])->release_output(0),
+			      (this->components_[19])->release_byte_output(0)));
+      this->components_[21]->connect_byte_output(
+		      this->components_[19]->release_byte_output(0));
+      this->memory_components_.push_back(this->components_[21]);
+      // Connect C17(15) ALU input 2 with Reg2
+      this->components_[17]->connect_byte_input(
+			(this->components_[21])->release_byte_output(1), 2);
+      // C22(20(19)) RegisterPlus (Reg3)
+      this->components_.push_back(
+		      std::make_shared<RegisterPlus>(
+			      (this->components_[2])->release_output(11),
+			      (this->components_[10])->release_output(0),
+			      (this->components_[18])->release_byte_output(0)));
+      this->components_[22]->connect_byte_output(
+		      this->components_[19]->release_byte_output(0));
+      this->memory_components_.push_back(this->components_[22]);
+      // C23(21(20)) RegisterPlus (Reg4)
+      this->components_.push_back(
+		      std::make_shared<RegisterPlus>(
+			      (this->components_[2])->release_output(12),
+			      (this->components_[11])->release_output(0),
+			      (this->components_[19])->release_byte_output(0)));
+      this->components_[23]->connect_byte_output(
+		      this->components_[19]->release_byte_output(0));
+      this->memory_components_.push_back(this->components_[23]);
+      // C24(22(21)) RegisterPlus (Reg5)
+      this->components_.push_back(
+		      std::make_shared<RegisterPlus>(
+			      (this->components_[2])->release_output(13),
+			      (this->components_[12])->release_output(0),
+			      (this->components_[19])->release_byte_output(0)));
       this->components_[24]->connect_byte_output(
-		      (this->components_[16])->release_byte_output(0));
-      // C25 ConditionalUnit (Program Reg3)
+		      this->components_[19]->release_byte_output(0));
+      this->memory_components_.push_back(this->components_[24]);
+      // C25(23(22)) ToggledByte for Output
+      this->components_.push_back(
+		      std::make_shared<ToggledByte>(
+			      (this->components_[19])->release_byte_output(0),
+			      (this->components_[13])->release_output(0), true));
+//      // C24(23) And (Copy S6)
+//      this->components_.push_back(
+//		      std::make_shared<And>(
+//			      (this->components_[2])->release_output(18),
+//			      (this->components_[2])->release_output(14)));
+//      // C25(24) ToggledByte for Input
+//      this->components_.push_back(
+//		      std::make_shared<ToggledByte>(
+//			      (this->byte_cin_[0])->release_byte_output(0),
+//			      (this->components_[24])->release_output(0)));
+//      this->components_[25]->connect_byte_output(
+//		      (this->components_[17])->release_byte_output(0));
+      // C26(26(25)) ConditionalUnit (Program Reg3)
       this->components_.push_back(
 		      std::make_shared<ConditionalUnit>(
 			      (this->components_[1])->release_byte_output(0),
-			      (this->components_[19])->release_byte_output(1)));
-      // C26 And (Conditional ConditionalUnit) -> Counter overwrite toggle
+			      (this->components_[22])->release_byte_output(1)));
+      // C27(27(26)) And (Conditional ConditionalUnit) -> Counter overwrite toggle
       this->components_.push_back(
 		      std::make_shared<And>(
 			      (this->components_[2])->release_output(19),
-			      (this->components_[25])->release_output(0)));
+			      (this->components_[26])->release_output(0)));
       //// finally connecting Counter input
       this->components_[0]->connect_input(
-		      this->components_[26]->release_output(0), 0);
+		      this->components_[27]->release_output(0), 0);
       this->components_[0]->connect_byte_input(
-		      this->components_[16]->release_byte_output(1),0);
-      // C27 ArithmeticLogicUnit (Program Reg1 Reg2)
-      this->components_.push_back(
-		      std::make_shared<ArithmeticLogicUnit>(
-			      (this->components_[1])->release_byte_output(0),
-			      (this->components_[17])->release_byte_output(1),
-			      (this->components_[18])->release_byte_output(1)));
+		      this->components_[19]->release_byte_output(1),0);
+      // old: // C27 ArithmeticLogicUnit (Program Reg1 Reg2)
+      // this->components_.push_back(
+      //		      std::make_shared<ArithmeticLogicUnit>(
+	//		      (this->components_[1])->release_byte_output(0),
+	//		      (this->components_[17])->release_byte_output(1),
+	//		      (this->components_[18])->release_byte_output(1)));
       //// finally connecting ByteMux for Reg3
-      this->components_[15]->connect_byte_input(
-		      (this->components_[27])->release_byte_output(0), 1);
+      //this->components_[15]->connect_byte_input(
+	//	      (this->components_[27])->release_byte_output(0), 1);
 
       this->byte_cout_[0]->connect_byte_input(
-			this->components_[22]->release_byte_output(0), 0);
+			this->components_[25]->release_byte_output(0), 0);
     }
 
     void add_lines(const std::vector<std::uint8_t>& container) {
@@ -276,8 +307,8 @@ int main() {
 //std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
 
 MagnumOpus circuit = MagnumOpus();
-std::vector<std::uint8_t> program{5, 130, 177, 68, 158};
-std::vector<std::uint8_t> input{69};
+std::vector<std::uint8_t> program{11, 130, 177, 67, 158};
+std::vector<std::uint8_t> input{77};
 circuit.add_lines(program);
 circuit.set_input_vals(input);
 circuit.tick();
