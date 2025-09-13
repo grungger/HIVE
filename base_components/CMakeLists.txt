@@ -19,6 +19,7 @@ add_executable(bitwise_op_test tests/bitwise_op_test.cpp)
 add_executable(tog_w tests/tog_w.cpp)
 add_executable(wordmemory_test tests/wordmemory_test.cpp)
 add_executable(mux_test tests/mux_test.cpp)
+add_executable(byte_decoder_test tests/byte_decoder_test.cpp)
 
 target_link_libraries(toggledbit_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(bitmemory_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
@@ -30,6 +31,7 @@ target_link_libraries(bitwise_op_test PRIVATE basecomponentsLib derivedlogicLib 
 target_link_libraries(tog_w PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(wordmemory_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 target_link_libraries(mux_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
+target_link_libraries(byte_decoder_test PRIVATE basecomponentsLib derivedlogicLib baselogicLib)
 
 add_test(NAME toggledbit_testexe COMMAND toggledbit_test)
 add_test(NAME bitmemory_testexe COMMAND bitmemory_test)
@@ -41,4 +43,5 @@ add_test(NAME bitwise_op_testexe COMMAND bitwise_op_test)
 add_test(NAME tog_wexe COMMAND tog_w)
 add_test(NAME wordmemory_testexe COMMAND wordmemory_test)
 add_test(NAME mux_testexe COMMAND mux_test)
+add_test(NAME byte_decoder_testexe COMMAND byte_decoder_test)
 

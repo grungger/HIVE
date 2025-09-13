@@ -54,6 +54,12 @@ WordArg splitter_out = splitword.release_wordarg_output();
 splitter_out.bits[2] = splitter_out.bits[8]; // add 2 to output
 WordMaker makewordadd2(splitter_out);
 makewordadd2.print_out(); // expected: 'bw260 '
+in32A.change_state(255);
+WordByter wordtobyte(in32A.release_word_output(0));
+wordtobyte.print_out(); // expected: 'b255 0 0 0 w'
+in32A.change_state(256);
+wordtobyte.compute_output();
+wordtobyte.print_out(); // expected: 'b0 1 0 0 w'
 
 in32A.change_state(2147483904); // bit 32 and bit 9 turned on
 splitword.compute_output();
@@ -62,6 +68,8 @@ makeword.compute_output();
 makeword.print_out(); // expected: 'bw2147483904 '
 makewordadd2.compute_output();
 makewordadd2.print_out(); // expected: 'bw2147483908 '
+wordtobyte.compute_output();
+wordtobyte.print_out(); // expected: 'b0 1 0 128 w '
 
 ByteOutput byteout(make.release_byte_output(0));
 byteout.compute_output(); // expected: '239'
@@ -74,8 +82,8 @@ std::cout.rdbuf(old);
 
 std::string capturedOutput = buffer.str();
 std::string expectedOutput = std::string("11100000bb7 b14 11110111bb239 b222 ") +
-			     "00000000100000000000000000000000bwbw256 bw260 " +
-			     "00000000100000000000000000000001bwbw2147483904 bw2147483908 " +
+			     "00000000100000000000000000000000bwbw256 bw260 b255 0 0 0 wb0 1 0 0 w" +
+			     "00000000100000000000000000000001bwbw2147483904 bw2147483908 b0 1 0 128 w" +
 			     "239ByteOutput 0: 239\n2147483904WordOutput 0: 2147483904\n";
 
 if (capturedOutput != expectedOutput) {

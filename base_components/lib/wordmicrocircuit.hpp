@@ -31,6 +31,11 @@ struct byte_t {
   std::uint8_t value;
 
   /**
+   * @brief Default empty constructor intializes byte_t to 0.
+   */
+  byte_t() : value(static_cast<std::uint8_t>(0)) {}
+
+  /**
    * @brief Templated constructor for a byte_t using a numeric type that
    *   is convertible to std::uint8_t.
    * @tparam T any numeric type convertible to std::uint8_t.
@@ -85,6 +90,11 @@ struct word_t {
    * @brief value is the member variable saving the word.
    */
   std::uint32_t value;
+
+  /**
+   * @brief Default empty constructor intializes word_t to 0.
+   */
+  word_t() : value(static_cast<std::uint32_t>(0)) {}
   
   /**
    * @brief Templated constructor for a word_t using a numeric type.

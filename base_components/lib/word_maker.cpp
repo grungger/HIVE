@@ -140,4 +140,33 @@ void WordMaker::compute_output() {
 
 const std::string WordMaker::gate_name = "WordMaker";
 
+WordMakerByte::WordMakerByte(ptr8_t arg1, ptr8_t arg2, ptr8_t arg3, ptr8_t arg4) {
+  // arg1
+  byte_input_pointers_[0] = arg1;
+  // arg2
+  byte_input_pointers_[1] = arg2;
+  // arg3
+  byte_input_pointers_[2] = arg3;
+  // arg4
+  byte_input_pointers_[3] = arg4;
+
+  std::uint32_t word_value = 0;
+  for (int i=0; i<4; i++) {
+    word_value |= (((byte_input_pointers_[i])->value) << i*8);
+  }
+  word_output_pointers_[0] = std::make_shared<word_t>(word_value);
+}
+
+void WordMakerByte::compute_output() {
+  std::uint32_t word_value = 0;
+  for (int i=0; i<4; i++) {
+    word_value |= (((byte_input_pointers_[i])->value) << i*8);
+  }
+  word_t temp(word_value);
+  *(word_output_pointers_[0]) = temp;
+}
+
+const std::string WordMakerByte::gate_name = "WordMakerByte";
+
+
 } //namespace Virtual

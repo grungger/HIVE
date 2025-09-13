@@ -1,4 +1,4 @@
-add_library(derivedcomponentsLib STATIC source_dest_decoder.cpp register_plus.cpp conditional_unit.cpp arithmetic_logic_unit.cpp)
+add_library(derivedcomponentsLib STATIC source_dest_decoder.cpp register_plus.cpp conditional_unit.cpp arithmetic_logic_unit.cpp RAM.cpp)
 
 target_link_libraries(derivedcomponentsLib PRIVATE baselogicLib derivedlogicLib basecomponentsLib)
 
@@ -10,4 +10,4 @@ install(TARGETS derivedcomponentsLib
 	RUNTIME DESTINATION bin
 	)
 
-install(FILES source_dest_decoder.hpp register_plus.hpp conditional_unit.hpp arithmetic_logic_unit.hpp DESTINATION include)
+install(FILES source_dest_decoder.hpp register_plus.hpp conditional_unit.hpp arithmetic_logic_unit.hpp RAM.hpp DESTINATION include)

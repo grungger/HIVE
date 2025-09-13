@@ -74,6 +74,28 @@ class WordSplitter : public wordMicroCircuit<0,0,1,32,0,0,0> {
     static const std::string gate_name;
 };
 
+
+/**
+ * @brief WordByter takes word_t and splits it into its 4 bytes.
+ *
+ * WordByter takes one word input and writes the 2^(4*i) to 2^(4*i+3) binary component of the word
+ * to the output at index i, i.e. the outputs have ascending order 2^i.
+ */
+class WordByter : public wordMicroCircuit<0,0,1,0,4,0,0> {
+  public:
+    /**
+     * @brief Constructor sets input and creates outputs.
+     * @param conA the input word.
+     */
+    WordByter(ptr32_t conA = ground32);
+    
+    /**
+     * @brief compute_output writes the 2^i splitting of input word to output bytes.
+     */
+    void compute_output();
+    
+    static const std::string gate_name;
+};
 } //namespace Virtual
 
 #endif

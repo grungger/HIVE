@@ -1,4 +1,5 @@
 #include "word_splitter.hpp"
+#include <cmath>
 
 namespace Virtual {
 
@@ -47,6 +48,29 @@ WordArg WordSplitter::release_wordarg_output() {
     output.bits[i] = this->release_output(i);
   }
   return output;
+}
+// TODO:
+WordByter::WordByter(ptr32_t conA) {
+  word_input_pointers_[0] = conA;
+  for (int i=0; i<4; i++) {
+    std::uint8_t ithByte = 0;
+    for (int j=0; j<8; j++) {
+      ithByte += (*conA)[8*i+j] * std::pow(2,j);
+    }
+    byte_output_pointers_[i] = std::make_shared<byte_t>(ithByte);
+  }
+}
+
+const std::string WordByter::gate_name = "WordByter";
+
+void WordByter::compute_output() {
+  for (int i=0; i<4; i++) {
+    std::uint8_t ithByte = 0;
+    for (int j=0; j<8; j++) {
+      ithByte += (*word_input_pointers_[0])[8*i+j] * std::pow(2,j);
+    }
+    *(byte_output_pointers_[i]) = ithByte;
+  }
 }
 
 } //namespace Virtual

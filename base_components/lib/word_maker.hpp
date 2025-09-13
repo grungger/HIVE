@@ -95,6 +95,26 @@ class WordMaker : public wordMicroCircuit<32,0,0,0,0,1,0> {
     static const std::string gate_name;
 };
 
+
+/**
+ * @brief WordMakerByte takes 4 bytes of input and converts them to a word.
+ */
+class WordMakerByte : public wordMicroCircuit<0,4,0,0,0,1,0> {
+  public:
+    /**
+     * @brief Constructor sets all 4 input bytes and converts them to a word value.
+     * @param in{j} is the jth input byte.
+     */
+    WordMakerByte(ptr8_t in1=ground8, ptr8_t in2=ground8, ptr8_t in3=ground8, ptr8_t=ground8);
+
+    /**
+     * @brief compute_output converts the 4 byte input into the std::uint32_t value word.
+     */
+    void compute_output();
+
+    static const std::string gate_name;
+};
+
 } //namespace Virtual
 
 #endif
