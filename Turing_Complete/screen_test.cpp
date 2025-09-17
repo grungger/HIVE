@@ -27,7 +27,7 @@ int main() {
         	// Move cursor to top-left (row=1, col=1)
         	std::cout << "\x1b[H";
 		for (int i = 0; i < width/2; i++) {
-			for (int j = 0; j < width; j++) {
+			for (int j = 0; j <  width; j++) {
 				std::cout << (nrs[frame][2*i] & (1u << j) ? (nrs[frame][2*i+1] & (1u << j) ? "\u2588" : "\u2580") : (nrs[frame][2*i+1] & (1u << j) ? "\u2584" : " "));
 			}
 			std::cout << "\n";
