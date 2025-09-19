@@ -14,6 +14,7 @@
 #include "word_nand.hpp"
 #include "word_nor.hpp"
 #include "word_or.hpp"
+#include "word_xor.hpp"
 #include "word_neg.hpp"
 #include "word_not.hpp"
 #include <sstream>
@@ -38,6 +39,7 @@ ByteMUX b_mux(inbit.release_output(0),
 ByteNAND b_nand(inA.release_byte_output(0), inB.release_byte_output(0));
 ByteNor b_nor(inA.release_byte_output(0), inB.release_byte_output(0));
 ByteOr b_or(inA.release_byte_output(0), inB.release_byte_output(0));
+ByteXor b_xor(inA.release_byte_output(0), inB.release_byte_output(0));
 ByteNeg b_neg(inA.release_byte_output(0));
 ByteNot b_not(inA.release_byte_output(0));
 
@@ -47,6 +49,7 @@ b_mux.print_out();  //  Expected: 'b0 '
 b_nand.print_out(); // Expected: 'b255 '
 b_nor.print_out(); // Expected: 'b255 '
 b_or.print_out(); // Expected: 'b0 '
+b_xor.print_out(); // Expected: 'b0 '
 b_neg.print_out(); // Expected: 'b0 '
 b_not.print_out(); // Expected: 'b255 '
 
@@ -57,6 +60,7 @@ b_mux.compute_output();
 b_nand.compute_output();
 b_nor.compute_output(); // 128 64 32 4
 b_or.compute_output();
+b_xor.compute_output();
 b_neg.compute_output(); // 128 64 32 4 1
 b_not.compute_output(); // 128 64 32 4
 
@@ -66,6 +70,7 @@ b_mux.print_out(); // Expected: 'b27 '
 b_nand.print_out(); // Expected: 'b255 '
 b_nor.print_out(); // Expected: 'b228 '
 b_or.print_out(); // Expected: 'b27 '
+b_xor.print_out(); // Expected: 'b27 '
 b_neg.print_out(); // Expected: 'b229 '
 b_not.print_out(); // Expected: 'b228 '
 std::cout << "\n";
@@ -76,7 +81,8 @@ b_and.compute_output();
 b_mux.compute_output();
 b_nand.compute_output(); // 128 64 32 8 4 1 = 237
 b_nor.compute_output(); // 128 64 32
-b_or.compute_output(); 
+b_or.compute_output();
+b_xor.compute_output(); // 8 4 1
 
 b_add.print_out(); // Expected: '0b49 '
 b_and.print_out(); // Expected: 'b18 '
@@ -84,6 +90,7 @@ b_mux.print_out(); // Expected: 'b27 '
 b_nand.print_out(); // Expected: 'b237 '
 b_nor.print_out(); // Expected: 'b224 '
 b_or.print_out(); // Expected: 'b31 '
+b_xor.print_out(); // Expected: 'b13 '
 
 inbit.change_state(true);
 inA.change_state(255);
@@ -191,8 +198,8 @@ std::cout.rdbuf(old);
 
 std::string capturedOutput = buffer.str();
 std::string expectedOutput = std::string(
-		"0b0 b0 b0 b255 b255 b0 b0 b255 0b27 b0 b27 b255 b228 b27 b229 b228 \n") + 
-		"0b49 b18 b27 b237 b224 b31 1b22 b22 b22 b233 b0 b255 b1 b0 \n" + 
+		"0b0 b0 b0 b255 b255 b0 b0 b0 b255 0b27 b0 b27 b255 b228 b27 b27 b229 b228 \n") + 
+		"0b49 b18 b27 b237 b224 b31 b13 1b22 b22 b22 b233 b0 b255 b1 b0 \n" + 
 		"0bw0 bw0 bw0 bw4294967295 bw4294967295 bw0 bw0 bw4294967295 \n" + 
 		"0bw19 bw0 bw19 bw4294967295 bw4294967276 bw19 bw4294967277 bw4294967276 \n" +
 		"0bw22 bw3 bw19 bw4294967292 bw4294967276 bw19 \n" + 

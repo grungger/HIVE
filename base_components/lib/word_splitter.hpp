@@ -96,6 +96,45 @@ class WordByter : public wordMicroCircuit<0,0,1,0,4,0,0> {
     
     static const std::string gate_name;
 };
+
+/**
+ * @brief ByteSF takes byte_t and extracts the most significant bit which in signed interpretation is the sign bit.
+ */
+class ByteSF : public byteMicroCircuit<0,1,1,0,0> {
+  public:
+    /**
+     * @brief Constructor sets input and creates outputs.
+     * @param conA the input word.
+     */
+    ByteSF(ptr8_t conA = ground8);
+    
+    /**
+     * @brief compute_output writes the 2^7 bit of the input word to the output bit.
+     */
+    void compute_output();
+    
+    static const std::string gate_name;
+};
+
+/**
+ * @brief WordSF takes word_t and extracts the most significant bit which in signed interpretation is the sign bit.
+ */
+class WordSF : public wordMicroCircuit<0,0,1,1,0,0,0> {
+  public:
+    /**
+     * @brief Constructor sets input and creates outputs.
+     * @param conA the input word.
+     */
+    WordSF(ptr32_t conA = ground32);
+    
+    /**
+     * @brief compute_output writes the 2^31 bit of the input word to the output bit.
+     */
+    void compute_output();
+    
+    static const std::string gate_name;
+};
+
 } //namespace Virtual
 
 #endif

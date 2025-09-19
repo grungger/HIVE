@@ -49,7 +49,7 @@ WordArg WordSplitter::release_wordarg_output() {
   }
   return output;
 }
-// TODO:
+
 WordByter::WordByter(ptr32_t conA) {
   word_input_pointers_[0] = conA;
   for (int i=0; i<4; i++) {
@@ -72,5 +72,30 @@ void WordByter::compute_output() {
     *(byte_output_pointers_[i]) = ithByte;
   }
 }
+
+
+ByteSF::ByteSF(ptr8_t conA) {
+  byte_input_pointers_[0] = conA;
+  output_pointers_[0] = std::make_shared<bool>((*conA)[7]);
+}
+
+const std::string ByteSF::gate_name = "ByteSF";
+
+void ByteSF::compute_output() {
+  *(output_pointers_[0]) = (*byte_input_pointers_[0])[7];
+}
+
+
+WordSF::WordSF(ptr32_t conA) {
+  word_input_pointers_[0] = conA;
+  output_pointers_[0] = std::make_shared<bool>((*conA)[31]);
+}
+
+const std::string WordSF::gate_name = "WordSF";
+
+void WordSF::compute_output() {
+  *(output_pointers_[0]) = (*word_input_pointers_[0])[31];
+}
+
 
 } //namespace Virtual
