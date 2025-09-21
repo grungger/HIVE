@@ -1,4 +1,4 @@
-add_library(HIVELib STATIC ConditionalUnit.cpp)
+add_library(HIVELib STATIC ConditionalUnit.cpp ArithmeticLogicUnit.cpp)
 
 target_link_libraries(HIVELib PRIVATE derivedcomponentsLib basecomponentsLib baselogicLib derivedlogicLib)
 
@@ -10,4 +10,4 @@ install(TARGETS HIVELib
 	RUNTIME DESTINATION bin
 	)
 
-install(FILES ConditionalUnit.hpp DESTINATION include)
+install(FILES ConditionalUnit.hpp ArithmeticLogicUnit.hpp DESTINATION include)

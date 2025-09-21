@@ -1,4 +1,4 @@
-add_library(derivedlogicLib STATIC not.cpp and.cpp  nor.cpp or.cpp xor.cpp xnor.cpp and3.cpp or3.cpp onebitdecoder.cpp threebitdecoder.cpp fourbitdecoder.cpp)
+add_library(derivedlogicLib STATIC not.cpp and.cpp  nor.cpp or.cpp xor.cpp xnor.cpp and3.cpp or3.cpp onebitdecoder.cpp threebitdecoder.cpp fourbitdecoder.cpp fivebitdecoder.cpp)
 
 target_link_libraries(derivedlogicLib PRIVATE baselogicLib)
 
@@ -10,4 +10,4 @@ install(TARGETS derivedlogicLib
 	RUNTIME DESTINATION bin
 	)
 
-install(FILES microcircuit.hpp not.hpp and.hpp nor.hpp or.hpp xor.hpp xnor.hpp and3.hpp or3.hpp onebitdecoder.hpp threebitdecoder.hpp fourbitdecoder.hpp DESTINATION include)
+install(FILES microcircuit.hpp not.hpp and.hpp nor.hpp or.hpp xor.hpp xnor.hpp and3.hpp or3.hpp onebitdecoder.hpp threebitdecoder.hpp fourbitdecoder.hpp fivebitdecoder.hpp DESTINATION include)
