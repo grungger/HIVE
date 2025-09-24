@@ -85,6 +85,12 @@ class Counter : public wordMicroCircuit<1,0,1,0,0,1,4> {
      *   outputs.
      */
     void memory_release();
+
+    /**
+     * @brief memory_receive carries out the memory overwrite but doesnt add 
+     *   to the counter.
+     */
+    void memory_receive();
 };
 
 }

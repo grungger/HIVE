@@ -27,9 +27,10 @@ ALU_HIVE dec(
 		inputB.release_word_output(0));
 dec.compute_output();
 dec.print_out(); // expected: "b0 w4294967295 " 
-inputA.change_state(257); 
+inputA.change_state(1u<<16);
+inputB.change_state((1u<<8)*128);
 dec.compute_output();
-dec.print_out(); // expected: "b0 w4294967038 "
+dec.print_out(); // expected: "b0 w4294868991 "
 operation.change_state(1);
 dec.compute_output();
 dec.print_out(); // expected: "b0 w0 "
@@ -149,7 +150,7 @@ dec.print_out(); // expected: "b0 w416 "
 
 std::cout.rdbuf(old);
 std::string capturedOutput = buffer.str();
-std::string expectedOutput = std::string("b0 w4294967295 b0 w4294967038 b0 w0 b0 w257 b0 w4294967038 b0 w4294967039 ") +
+std::string expectedOutput = std::string("b0 w4294967295 b0 w4294868991 b0 w0 b0 w257 b0 w4294967038 b0 w4294967039 ") +
        					"b0 w4294945073 b0 w55 b0 w207 b0 w191 b0 w4294967104 b0 w4127194944 b0 w4294967040 " +
 					"b0 w69 b0 w250 b0 w253 b0 w5 b0 w5380 b0 w5381 b0 w95 b0 w19 b0 w4294967271 " + 
 					"b1 w13 b1 w13 b1 w14 b1 w4294967281 " + // ?last b1?

@@ -87,6 +87,11 @@ void Counter::memory_release() {
   circuit_components_[2]->memory_release();
 }
 
+void Counter::memory_receive() {
+  circuit_components_[0]->compute_output();
+  circuit_components_[2]->compute_output();
+}
+
 const std::string Counter::gate_name = "Counter";
 
 } //namespace Virtual

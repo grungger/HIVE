@@ -112,12 +112,17 @@ class BaseGate {
     virtual void connect_output(ptr_t) {}
     virtual void connect_byte_output(ptr8_t) {}
     virtual void connect_word_output(ptr32_t) {}
+    virtual void connect_word_output_i(ptr32_t,bool) {}
     virtual ptr8_t release_byte_output(io_t) {return this->ground8;}
     virtual ptr32_t release_word_output(io_t) {return this->ground32;}
     virtual ByteArg release_bytearg_output() {return ByteArg();} // {return this->defaultArgb;}
     virtual WordArg release_wordarg_output() {return WordArg();} // {return this->defaultArgw;}
     virtual void memory_release() {}
+    virtual void memory_receive() {}
     virtual void add_lines(const std::vector<std::uint8_t>&) {std::cout << "Better?";}
+    virtual void add_lines(const std::vector<std::uint32_t>&) {std::cout << "Better?";}
+    virtual void printMemory() {}
+    virtual void printRAM() {}
 };
 
 /**

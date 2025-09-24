@@ -6,6 +6,7 @@
 // Includes:
 #include "wordmicrocircuit.hpp"
 #include <stdexcept>
+#include <string>
 
 // Header Guards:
 #ifndef PROGRAM_H
@@ -70,7 +71,7 @@ class ByteProgram : public byteMicroCircuit<0,1,0,1,0> {
  * (the input is usually connected to a counter, in order to walk through
  * the program).
  */
-class Program : public wordMicroCircuit<0,1,1,0,0,1,0> {
+class Program : public wordMicroCircuit<0,0,1,0,0,1,0> {
   protected:
     /**
      * @brief code_lines saves the instruction words.
@@ -86,12 +87,6 @@ class Program : public wordMicroCircuit<0,1,1,0,0,1,0> {
 
   public:
     /**
-     * @brief Constructor for Program block with byte input; sets byte_word_bool False.
-     * @param locator is an input byte that tells the program which instruction to execute.
-     */
-    Program(ptr8_t locator=ground8);
-
-    /**
      * @brief Constructor for Program block with word input; sets byte_word_bool True.
      * @param locator is an input word that tells the program which instruction to execute.
      */
@@ -99,11 +94,9 @@ class Program : public wordMicroCircuit<0,1,1,0,0,1,0> {
 
     /**
      * @brief add_lines is a templated function to add code words.
-     * @tparam Container is any iterable container containing word_t values.
      * @param container the new code lines to be added.
      */
-    template <typename Container>
-    void add_lines(const Container& container) {
+    void add_lines(const std::vector<std::uint32_t>& container) {
       for(auto it=container.begin(); it<container.end(); it++) {
         code_lines.push_back(*it);
       }

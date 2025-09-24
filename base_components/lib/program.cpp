@@ -17,18 +17,11 @@ void ByteProgram::edit_code(int location, byte_t replacement) {
 void ByteProgram::compute_output() {
   int index = static_cast<int>((*byte_input_pointers_[0]).value);
   if (static_cast<size_t>(index) >= code_lines.size()) {
-    std::cout << "Counter: " << index << ", code_line size: " << code_lines.size();
     throw std::domain_error("Counter value is out of range of program");
   }
   (*byte_output_pointers_[0]) = code_lines[index];
 }
 
-
-Program::Program(ptr8_t locator) {
-  byte_input_pointers_[0] = locator;
-  byte_word_bool = false;
-  word_output_pointers_[0] = std::make_shared<word_t>(0);
-}
 
 Program::Program(ptr32_t locator) {
   word_input_pointers_[0] = locator;
@@ -52,7 +45,7 @@ void Program::compute_output() {
     index = static_cast<int>((*byte_input_pointers_[0]).value);
   }
   if (static_cast<size_t>(index) >= code_lines.size()) {
-    throw std::domain_error("Counter value is out of range of program");
+    throw std::domain_error("Counter value " + std::to_string(index) + " is out of range of program");
   }
   (*word_output_pointers_[0]) = code_lines[index];
 }

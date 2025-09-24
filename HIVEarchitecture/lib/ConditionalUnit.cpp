@@ -114,7 +114,9 @@ ConditionalUnitHIVE::ConditionalUnitHIVE(ptr_t toggle, ptr8_t operation, ptr32_t
   
   circuit_components_[33] = std::make_shared<ToggledBit>(
 		  		circuit_components_[7]->release_output(0),
-				toggle);
+				toggle,
+				true); // overwrite with zero if not toggled 
+				       // (i.e. dont overwrite counter if not in conditional mode)
   output_pointers_[0] = circuit_components_[33]->release_output(0);
 }
 

@@ -113,6 +113,11 @@ class ToggledWord : public wordMicroCircuit<1,0,1,0,0,1,133> {
      * @param connected_output the new output to write to.
      */
     void connect_word_output(ptr32_t connected_output);
+
+    /**
+     * @brief memory_release simply calls compute_output.
+     */
+    void memory_release();
 };
 
 } //namespace Virtual

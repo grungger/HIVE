@@ -106,4 +106,8 @@ void ToggledWord::connect_word_output(ptr32_t connected_output) {
   circuit_components_[2]->connect_word_input(connected_output, 0);
 }
 
+void ToggledWord::memory_release() {
+  this->compute_output();
+}
+
 } //namespace Virtual
