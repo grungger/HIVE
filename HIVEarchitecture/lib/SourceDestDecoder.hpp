@@ -50,9 +50,11 @@ namespace Virtual{
  *   Third decoding destinations:
  *     output_pointers 27 to 42 for Reg,
  *     		43 for RC, 44 for Display and 45 as Imm flag
+ *   Fourth outputting flags for RAM.
+ *     output_pointers 46, 47 are RAM flag for B and C.
  * Note: operators are not decoded here.
  */
-class SourceDestDecoderHIVE : public wordMicroCircuit<0,0,1,46,0,0,7> {
+class SourceDestDecoderHIVE : public wordMicroCircuit<0,0,1,48,0,0,8> {
   public:
     /**
      * @brief Constructor sets up the decoder.

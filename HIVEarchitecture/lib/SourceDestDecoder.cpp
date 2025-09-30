@@ -79,7 +79,11 @@ SourceDestDecoderHIVE::SourceDestDecoderHIVE(ptr32_t input) {
   output_pointers_[43] = circuit_components_[6]->release_output(16);
   output_pointers_[44] = circuit_components_[6]->release_output(17);
   output_pointers_[45] = circuit_components_[3]->release_output(7);
-
+  // New
+  circuit_components_[7] = std::make_shared<ByteSplitter>(
+		  circuit_components_[0]->release_byte_output(0));
+  output_pointers_[46] = circuit_components_[7]->release_output(5);
+  output_pointers_[47] = circuit_components_[7]->release_output(6);
 }
 
 void SourceDestDecoderHIVE::rewire_input() {

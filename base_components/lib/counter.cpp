@@ -84,6 +84,8 @@ void Counter::compute_output() {
 }
 
 void Counter::memory_release() {
+  circuit_components_[0]->compute_output();
+  circuit_components_[1]->compute_output();
   circuit_components_[2]->memory_release();
 }
 

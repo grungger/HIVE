@@ -45,7 +45,7 @@ RAM::RAM(ptr_t computeCopyToggle, ptr_t AloadToggle, ptr_t Btoggle, ptr8_t Aaddr
   word_output_pointers_[1] = circuit_components_[4]->release_word_output(0);
 }
 
-void RAM::compute_output() {
+void RAM::full_compute() {
   auto ptrAaddress = std::shared_ptr<word_t>(&RAM_lines_[static_cast<int>((byte_input_pointers_[0])->value)], [](word_t*){} );
   circuit_components_[3]->connect_word_input(ptrAaddress,0);
 
@@ -56,6 +56,13 @@ void RAM::compute_output() {
   for (int i=0; i<6; i++) {
     circuit_components_[i]->compute_output();
   }
+}
+
+void RAM::compute_output() {
+  auto ptrBaddress = std::shared_ptr<word_t>(&RAM_lines_[static_cast<int>((byte_input_pointers_[1])->value)], [](word_t*){} );
+  circuit_components_[5]->connect_word_output(ptrBaddress);
+  circuit_components_[2]->compute_output();
+  circuit_components_[5]->compute_output();
 }
 
 void RAM::rewire_input() {

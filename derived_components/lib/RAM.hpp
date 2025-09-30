@@ -68,6 +68,11 @@ class RAM : public wordMicroCircuit<3,2,1,0,0,2,6> {
     void memory_release();
 
     /**
+     * @brief full_compute assumes memory_release wasnt run before.
+     */
+    void full_compute();
+
+    /**
      * @brief connect_word_output_i reroutes the toggledword method to the outer shell.
      * @param conOut the word location to connect to.
      * @param index a boolean to choose between output word A with index 0 (false) or B with 1 (true).

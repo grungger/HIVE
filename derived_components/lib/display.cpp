@@ -11,22 +11,30 @@ Display::Display(ptr_t save, ptr_t flush, ptr32_t input, double SPF) {
 }
 
 Display::~Display() {
-  const char* reset = "\x1b[?1049l\x1b[?25h";
-  ::write(STDOUT_FILENO, reset, std::strlen(reset));
+  bool debug = false;
+  if (not debug) {
+    const char* reset = "\x1b[?1049l\x1b[?25h";
+    ::write(STDOUT_FILENO, reset, std::strlen(reset));
+  }
 }
 
 void Display::compute_output() {
+  bool debug = false;
   // Display startup
   if (*input_pointers_[1] and display_memory_.size()==0) {
-    std::cout << "\x1b[?1049h\x1b[?25l";
-    std::cout << "\x1b[H";
-    std::cout.flush();
+    if (not debug) {
+      std::cout << "\x1b[?1049h\x1b[?25l";
+      std::cout << "\x1b[H";
+      std::cout.flush();
+    }
     t_last_frame_ = std::chrono::high_resolution_clock::now();
     return;
   }
   // Display flush
   else if (*input_pointers_[1]) {
-    std::cout << "\x1b[H";
+    if (not debug) {
+      std::cout << "\x1b[H";
+    }
     if (display_memory_.size()%2!=0) {
       display_memory_.push_back(0);
     }

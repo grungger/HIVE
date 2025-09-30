@@ -5,7 +5,7 @@
 using namespace Virtual;
 
 int main() {
-	HIVEmind hive = HIVEmind();
+	HIVEmind hive = HIVEmind(3.0);
 	unsigned int flush = (1u<<24)*7;
 	unsigned int immediate1b = (1u<<16);
 	unsigned int immediatefull = (1u<<24)*128;
@@ -14,7 +14,9 @@ int main() {
 	unsigned int copy = (1u<<24)*3;
 	unsigned int cond = (1u<<24)*4;
 	unsigned int sram = (1u<<24)*64;
+	unsigned int sramIm = (1u<<24)*64+64;
 	unsigned int dram = (1u<<24)*32;
+	unsigned int dramIm = (1u<<24)*32+32;
 	unsigned int s1 = (1u<<16);
 	unsigned int d1 = (1u<<8);
 	std::vector<std::uint32_t> program{
@@ -88,14 +90,14 @@ int main() {
 	};
 	std::vector<std::uint32_t> program4{
 		flush,
-		copy+dram+s1*128+s1*33+d1*4, // 33 to RAM4
-		copy+dram+s1*128+s1*17+d1*5, // 17 to RAM5
+		copy+dramIm+s1*128+s1*33+d1*4, // 33 to RAM4
+		copy+dramIm+s1*128+s1*17+d1*5, // 17 to RAM5
 		copy+s1*4+d1*17, // test whether still 0
 		copy+s1*5+d1*17, // test whether still 0
-		copy+sram+s1*4+d1*17,
-		copy+sram+s1*5+d1*17,
-		copy+dram+sram+s1*4+d1*1,
-		copy+sram+s1*1+d1*17,
+		copy+sramIm+s1*4+d1*17,
+		copy+sramIm+s1*5+d1*17,
+		copy+dramIm+sramIm+s1*4+d1*1,
+		copy+sramIm+s1*1+d1*17,
 		flush
 	};
 
