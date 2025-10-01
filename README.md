@@ -28,18 +28,15 @@
 <br />
 <div align="center">
   <a href="https://github.com/grungger/HIVE">
-    <img src="docs/AcornGoL_120x.gif" alt="Logo" width="80" height="80">
+    <img src="images/AcornGoL_120x.gif" alt="Logo" width="400" height="400">
   </a>
 
 <h3 align="center">HIVE - Highly Inefficient Virtual Emulator</h3>
 
   <p align="center">
-    CPU built from NAND gates simulated in C++ to runConways Game of Life
+    CPU built from NAND gates simulated in C++ to run Conways Game of Life
     <br />
     <a href="https://github.com/grungger/HIVE"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/grungger/HIVE">View Demo</a>
     &middot;
     <a href="https://github.com/grungger/HIVE/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     &middot;
@@ -48,178 +45,49 @@
 </div>
 
 
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+The codebase HIVE was developed as an educational project in order to get an intuitive understanding of how CPU's are built from simple logic gates.
 
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `grungger`, `HIVE`, `twitter_handle`, `linkedin_username`, `gmail`, `ganimede7155`, `HIVE - Highly Inefficient Virtual Emulator`, `CPU built from NAND gates simulated in C++ to runConways Game of Life`, `project_license`
+The project aimed to build a fully working Turing complete CPU architecture which can run simple programs on it while only using NAND gates to build the CPU. 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+The NAND gate is pretty much the only "gate" class that uses C++ logic (if statements) to determine the output of a gate. All other logic gates are then built via combinations of NAND gates or other gates that have already been assembled from NAND gates. This makes it possible to essentially build an entire CPU architecture only from this NAND gate with one exception: to simulate ticks in time and to retain information from one tick to the next I also had to include a delay component which stores one bit of memory and outputs it one tick later. This is enough to build a complete architecture as implemented in Turing_Complete/MagnumOpus.cpp. 
 
+For convenience I added a screen output method that uses escape codes to print to a persistent display as well as a RAM component which stores words in a C++ array (I coud have implemented it using only NAND gates but it would have slowed down the performance too much so it is just a neat addon). This is then the final architecture HIVEarchitecture/lib/HIVEmind.cpp which is a very slow and inefficient virtual emulator of a CPU. 
 
-
-### Built With
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+It can run Conway's Game of Life successfully in a 16x16 square as implemented in HIVEarchitecture/HIVE/GameofLife.cpp - this is the gif at the top of the README which is the captured output sped up 120x (I spared you from the agony of staring at the screen waiting for the next generation to appear).
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+If for some reason you want to experience extreme inefficiency the codebase can be built with cmake.  
+Simply `cd` to the cloned project directory HIVE add a build folder then `cd` into it and run `cmake ..`. Then the entire project is built by running `make` inside the build folder. If you want to build a specific target check the cmake files in the individual libraries to check for target names. All basic libraries containing all the derived gates have tests written for them and they can be collectively run via `make test`.
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+Just clone the repo
    ```sh
    git clone https://github.com/grungger/HIVE.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-5. Change git remote url to avoid accidental pushes to base project
-   ```sh
-   git remote set-url origin grungger/HIVE
-   git remote -v # confirm the changes
-   ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/grungger/HIVE/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+See for example HIVEarchitecture/HIVE/GameofLIfe.cpp for an example on how to use the HIVE CPU and write a program for it.
 
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+I am very open to contributions and extensions to this codebase. Feel free to fork and create a pull request.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Top contributors:
-
-<a href="https://github.com/grungger/HIVE/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=grungger/HIVE" alt="contrib.rocks image" />
-</a>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the project_license. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - ganimede7155@gmail.com
 
 Project Link: [https://github.com/grungger/HIVE](https://github.com/grungger/HIVE)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
