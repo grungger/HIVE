@@ -995,7 +995,7 @@ WARN_LOGFILE           =
 
 INPUT                  = ./base_logic/lib ./base_logic/tests ./derived_logic/lib ./derived_logic/tests
 INPUT                 += ./base_components/lib ./base_components/tests ./derived_components/lib ./derived_components/tests
-INPUT                 += ./Turing_Complete ./HIVEarchitecture/lib ./HIVEarchitecture/tests
+INPUT                 += ./Turing_Complete ./circuits/lib ./HIVEarchitecture/lib ./HIVEarchitecture/tests
 
 # This tag can be used to specify the character encoding of the source files
 # that Doxygen parses. Internally Doxygen uses the UTF-8 encoding. Doxygen uses
